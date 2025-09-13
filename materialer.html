@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="da">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Materialer brugt i projektet · Vandkanon</title>
+    <meta name="description" content="Alt materiale brugt i projektet: videoer, dokumenter og podcasts." />
+    <link rel="icon" type="image/png" href="img/VandkanonLogo.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              brand: { 50:'#f0f9ff',100:'#e0f2fe',200:'#bae6fd',300:'#7dd3fc',400:'#38bdf8',500:'#0ea5e9',600:'#0284c7',700:'#0369a1',800:'#075985',900:'#0c4a6e' }
+            },
+            boxShadow: {
+              e1: '0 1px 2px 0 rgb(0 0 0 / 0.04), 0 1px 3px 0 rgb(0 0 0 / 0.08)'
+            }
+          }
+        }
+      };
+    </script>
+    <style>
+      html{ scroll-behavior:smooth }
+      #main-nav .nav-link.is-active { color: #0ea5e9; }
+    </style>
+  </head>
+  <body class="antialiased bg-white text-slate-900">
+    <!-- Simple topbar -->
+    <header class="sticky top-0 z-40 bg-white/90 backdrop-blur border-b border-slate-200 relative">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
+        <!-- Left: Logo -->
+        <a href="index.html" class="flex items-center" aria-label="Start">
+          <img src="img/VandkanonLogo.png" alt="Vandkanon" class="h-8 w-auto" />
+        </a>
+        <!-- Center: Primary nav (desktop) -->
+        <nav id="main-nav" class="hidden md:flex relative md:absolute md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2 items-center gap-8 text-sm font-extrabold tracking-wide uppercase text-slate-900" role="navigation" aria-label="Primary">
+          <a href="index.html" data-target="start" class="nav-link py-2">Start</a>
+          <a href="materialer.html" data-target="materialer" class="nav-link py-2">Materialer</a>
+          <a href="historie.html" data-target="historie" class="nav-link py-2">Historie</a>
+          <span id="nav-indicator" class="pointer-events-none absolute -bottom-1 h-1 rounded-full bg-[#e8f6fe] transition-all duration-300"></span>
+        </nav>
+        <!-- Right: Facebook + burger -->
+        <div class="flex items-center gap-2">
+          <a href="https://www.facebook.com/mhlillelund" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="hidden md:inline-flex h-10 w-10 items-center justify-center rounded-lg ring-1 ring-[#1877F2]/30 text-[#1877F2] hover:bg-[#1877F2]/10 transition-transform duration-150 hover:scale-[1.03]">
+            <svg viewBox="0 0 24 24" class="h-6 w-6 fill-current" aria-hidden="true"><path d="M13.5 9H15V6h-1.5A3.5 3.5 0 0 0 10 9.5V11H8v3h2v7h3v-7h2.1l.4-3H13v-1a1 1 0 0 1 1-1Z"/></svg>
+          </a>
+          <button id="nav-toggle" type="button" class="md:hidden inline-flex items-center justify-center h-9 w-9 rounded-lg ring-1 ring-slate-200 text-slate-700 hover:bg-slate-50" aria-controls="mobile-menu" aria-expanded="false" aria-label="Åbn menu">
+            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+      </div>
+      <!-- Mobile dropdown menu -->
+      <div id="mobile-menu" class="md:hidden hidden absolute inset-x-0 top-14 z-30 bg-white/95 backdrop-blur border-b border-slate-200 shadow-e1">
+        <nav class="px-4 py-4 flex flex-col gap-2 text-sm font-extrabold uppercase tracking-wide text-slate-900" aria-label="Mobil">
+          <a href="index.html" class="py-2">Start</a>
+          <a href="materialer.html" class="py-2">Materialer</a>
+          <a href="historie.html" class="py-2">Historie</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
+      <header class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <h1 class="font-extrabold text-3xl md:text-4xl tracking-tight">Projektets materialer</h1>
+          <p class="mt-1 text-slate-600">Alt materiale brugt i projektet – videoer, dokumenter og podcasts.</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <div class="hidden sm:flex items-center gap-1 rounded-xl bg-white ring-1 ring-slate-200 p-1">
+            <button data-filter="all" class="lib-tab px-3 py-1.5 text-sm font-semibold rounded-lg text-slate-700 hover:bg-slate-50">Alle</button>
+            <button data-filter="video" class="lib-tab px-3 py-1.5 text-sm font-semibold rounded-lg text-slate-700 hover:bg-slate-50">Videoer</button>
+            <button data-filter="document" class="lib-tab px-3 py-1.5 text-sm font-semibold rounded-lg text-slate-700 hover:bg-slate-50">Dokumenter</button>
+            <button data-filter="podcast" class="lib-tab px-3 py-1.5 text-sm font-semibold rounded-lg text-slate-700 hover:bg-slate-50">Podcasts</button>
+          </div>
+          <label class="relative flex items-center">
+            <input id="lib-search" type="search" placeholder="Søg i materialer…" class="w-72 max-w-[70vw] rounded-xl bg-white ring-1 ring-slate-200 px-9 py-2 text-sm placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-300" />
+            <svg viewBox="0 0 24 24" class="absolute left-3 h-4 w-4 text-slate-400" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+          </label>
+        </div>
+      </header>
+
+      <div class="mt-6 flex sm:hidden items-center gap-1 rounded-xl bg-white ring-1 ring-slate-200 p-1">
+        <button data-filter="all" class="lib-tab px-3 py-1.5 text-sm font-semibold rounded-lg text-slate-700 hover:bg-slate-50">Alle</button>
+        <button data-filter="video" class="lib-tab px-3 py-1.5 text-sm font-semibold rounded-lg text-slate-700 hover:bg-slate-50">Videoer</button>
+        <button data-filter="document" class="lib-tab px-3 py-1.5 text-sm font-semibold rounded-lg text-slate-700 hover:bg-slate-50">Dokumenter</button>
+        <button data-filter="podcast" class="lib-tab px-3 py-1.5 text-sm font-semibold rounded-lg text-slate-700 hover:bg-slate-50">Podcasts</button>
+      </div>
+
+      <div class="mt-6 text-sm text-slate-600" id="lib-stats"></div>
+
+      <section id="lib-list" class="mt-4 space-y-10"></section>
+
+      <template id="lib-card">
+        <article class="group relative overflow-hidden rounded-2xl bg-white ring-1 ring-slate-200 shadow-sm hover:shadow-md transition-shadow">
+          <div class="relative aspect-[16/9] bg-slate-100">
+            <img data-el="thumb" alt="" class="absolute inset-0 w-full h-full object-cover" />
+            <div class="absolute left-2 top-2 inline-flex items-center gap-1 rounded-full bg-white/90 ring-1 ring-slate-200 px-2 py-0.5 text-[11px] font-semibold text-slate-700">
+              <span data-el="typeIcon"></span>
+              <span data-el="type"></span>
+            </div>
+          </div>
+          <div class="p-3">
+            <h3 class="font-semibold text-slate-900 leading-snug" data-el="title"></h3>
+            <p class="mt-1 text-xs text-slate-500" data-el="meta"></p>
+            <div class="mt-3 flex items-center gap-2">
+              <a data-el="open" class="inline-flex items-center gap-2 text-brand-700 font-semibold hover:text-brand-800" target="_blank" rel="noopener">
+                Åbn
+                <svg viewBox="0 0 24 24" class="h-4 w-4 fill-current" aria-hidden="true"><path d="M5 12h12m-4-4 4 4-4 4" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+            </div>
+          </div>
+        </article>
+      </template>
+    </main>
+    <script>
+      // Manifest — tilpas/udvid listen her.
+      const MATERIALS = [
+        {
+          title: 'Skud – teaser',
+          type: 'video',
+          url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+          date: '2025-09-01',
+          tags: ['skud','teaser']
+        },
+        {
+          title: 'Specifikation (PDF)',
+          type: 'document',
+          url: 'uploads/specifikation.pdf',
+          date: '2025-08-20',
+          tags: ['doku','spec']
+        },
+        {
+          title: 'Interview med Michael (MP3)',
+          type: 'podcast',
+          url: 'uploads/interview.mp3',
+          date: '2025-09-05',
+          tags: ['podcast','interview']
+        }
+      ];
+
+      function ytId(url){
+        try{
+          const u = new URL(url);
+          if (u.hostname.includes('youtu.be')) return u.pathname.slice(1);
+          if (u.searchParams.get('v')) return u.searchParams.get('v');
+          const m = u.pathname.match(/\/shorts\/([\w-]+)/); if (m) return m[1];
+        }catch{}
+        return null;
+      }
+      function thumbFor(item){
+        if (item.type === 'video'){
+          const id = ytId(item.url);
+          if (id) return `https://img.youtube.com/vi/${id}/hqdefault.jpg`;
+        }
+        if (item.type === 'document') return 'data:image/svg+xml;utf8,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23788"><rect x="5" y="3" width="14" height="18" rx="2" fill="%23cbd5e1"/><path d="M8 7h8M8 11h8M8 15h6" stroke="%23788" stroke-width="2"/></svg>');
+        if (item.type === 'podcast') return 'data:image/svg+xml;utf8,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%230ea5e9"><circle cx="12" cy="8" r="3" fill="%230ea5e9"/><path d="M5 21a7 7 0 1 1 14 0" fill="none" stroke="%230ea5e9" stroke-width="2"/></svg>');
+        return '';
+      }
+      function typeIcon(type){
+        if (type==='video') return '<svg viewBox="0 0 24 24" class="h-3.5 w-3.5" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>';
+        if (type==='document') return '<svg viewBox="0 0 24 24" class="h-3.5 w-3.5" fill="currentColor" aria-hidden="true"><path d="M6 2h9l5 5v15a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z"/></svg>';
+        if (type==='podcast') return '<svg viewBox="0 0 24 24" class="h-3.5 w-3.5" fill="currentColor" aria-hidden="true"><path d="M12 3a5 5 0 0 1 5 5v1a5 5 0 1 1-10 0V8a5 5 0 0 1 5-5z"/></svg>';
+        return '';
+      }
+
+      (function(){
+        const list = document.getElementById('lib-list');
+        const stats = document.getElementById('lib-stats');
+        const tabs = Array.from(document.querySelectorAll('.lib-tab'));
+        const searchInput = document.getElementById('lib-search');
+        let currentFilter = 'all';
+        let currentSearch = '';
+
+        function render(){
+          list.innerHTML = '';
+          const filtered = MATERIALS.filter(item => {
+            const okType = currentFilter==='all' || item.type===currentFilter;
+            const s = currentSearch.trim().toLowerCase();
+            const okSearch = !s || (item.title.toLowerCase().includes(s) || (item.tags||[]).join(' ').toLowerCase().includes(s));
+            return okType && okSearch;
+          });
+          stats.textContent = `${filtered.length} af ${MATERIALS.length} materialer` + (currentFilter==='all'?'':` · ${currentFilter}`);
+
+          const tpl = document.getElementById('lib-card');
+
+          if (currentFilter === 'all') {
+            const order = ['document','podcast','video'];
+            const labels = { video: 'Videoer', document: 'Dokumenter', podcast: 'Podcasts' };
+
+            const stack = document.createElement('div');
+            stack.className = 'flex flex-col';
+            let first = true;
+
+            order.forEach(type => {
+              const items = filtered.filter(i=>i.type===type);
+              if (!items.length) return;
+
+              const section = document.createElement('section');
+              section.className = first ? '' : 'pt-8 mt-8 border-t border-slate-200';
+              first = false;
+
+              const h = document.createElement('h2');
+              h.className = 'mb-4 text-xl font-semibold text-slate-900';
+              h.textContent = `${labels[type]} (${items.length})`;
+
+              const grid = document.createElement('div');
+              grid.className = 'grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4';
+
+              items.forEach(item => {
+                const node = tpl.content.cloneNode(true);
+                node.querySelector('[data-el="thumb"]').src = thumbFor(item);
+                node.querySelector('[data-el="title"]').textContent = item.title;
+                node.querySelector('[data-el="type"]').textContent = labels[item.type] || item.type;
+                node.querySelector('[data-el="typeIcon"]').innerHTML = typeIcon(item.type);
+                node.querySelector('[data-el="meta"]').textContent = item.date ? new Date(item.date).toLocaleDateString('da-DK') : '';
+                const a = node.querySelector('[data-el="open"]');
+                a.href = item.url;
+                if (item.type==='document' || item.type==='podcast') { a.setAttribute('download', ''); }
+                grid.appendChild(node);
+              });
+
+              section.appendChild(h);
+              section.appendChild(grid);
+              stack.appendChild(section);
+            });
+
+            list.appendChild(stack);
+          } else {
+            // Single grid when a specific filter er valgt
+            const grid = document.createElement('div');
+            grid.className = 'grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4';
+            filtered.forEach(item => {
+              const node = tpl.content.cloneNode(true);
+              node.querySelector('[data-el="thumb"]').src = thumbFor(item);
+              node.querySelector('[data-el="title"]').textContent = item.title;
+              node.querySelector('[data-el="type"]').textContent = item.type.charAt(0).toUpperCase() + item.type.slice(1);
+              node.querySelector('[data-el="typeIcon"]').innerHTML = typeIcon(item.type);
+              node.querySelector('[data-el="meta"]').textContent = item.date ? new Date(item.date).toLocaleDateString('da-DK') : '';
+              const a = node.querySelector('[data-el="open"]');
+              a.href = item.url;
+              if (item.type==='document' || item.type==='podcast') { a.setAttribute('download', ''); }
+              grid.appendChild(node);
+            });
+            list.appendChild(grid);
+          }
+        }
+
+        tabs.forEach(btn=>{
+          btn.addEventListener('click', ()=>{
+            tabs.forEach(b=>b.classList.remove('bg-brand-100','text-brand-700'));
+            btn.classList.add('bg-brand-100','text-brand-700');
+            currentFilter = btn.getAttribute('data-filter');
+            render();
+          });
+        });
+        // init
+        const firstTab = tabs.find(b=>b.getAttribute('data-filter')==='all') || tabs[0];
+        if (firstTab){ firstTab.classList.add('bg-brand-100','text-brand-700'); }
+        searchInput.addEventListener('input', ()=>{ currentSearch = searchInput.value; render(); });
+        render();
+      })();
+    </script>
+    <script>
+      // Navbar underline + active link (match index)
+      (function(){
+        const nav = document.getElementById('main-nav');
+        const indicator = document.getElementById('nav-indicator');
+        if (!nav || !indicator) return;
+        const links = Array.from(nav.querySelectorAll('.nav-link'));
+        const current = location.pathname.split('/').pop() || 'index.html';
+        let active = links.find(a => (a.getAttribute('href')||'') === current) || links[0];
+        function setActive(el){
+          links.forEach(x=>{ x.classList.remove('is-active'); x.removeAttribute('aria-current'); });
+          el.classList.add('is-active');
+          el.setAttribute('aria-current','page');
+        }
+        function positionIndicator(el){
+          const navBox = nav.getBoundingClientRect();
+          const box = el.getBoundingClientRect();
+          const factor = 0.7;
+          const width = Math.round(box.width * factor);
+          const left = Math.round((box.left - navBox.left) + (box.width - width) / 2);
+          indicator.style.left = left + 'px';
+          indicator.style.width = width + 'px';
+        }
+        links.forEach((a)=>{
+          a.addEventListener('mouseenter',()=>positionIndicator(a));
+          a.addEventListener('focus',()=>positionIndicator(a));
+          a.addEventListener('click',()=>{ active = a; setActive(active); });
+        });
+        nav.addEventListener('mouseleave',()=>positionIndicator(active));
+        window.addEventListener('load',()=>{ setActive(active); positionIndicator(active); });
+        window.addEventListener('resize',()=>positionIndicator(active));
+      })();
+
+      // Mobile menu toggle
+      (function(){
+        const btn = document.getElementById('nav-toggle');
+        const menu = document.getElementById('mobile-menu');
+        if (!btn || !menu) return;
+        function openMenu(){ menu.classList.remove('hidden'); btn.setAttribute('aria-expanded','true'); }
+        function closeMenu(){ menu.classList.add('hidden'); btn.setAttribute('aria-expanded','false'); }
+        function toggle(){ (btn.getAttribute('aria-expanded')==='true')? closeMenu(): openMenu(); }
+        btn.addEventListener('click', toggle);
+        menu.querySelectorAll('a').forEach(a=>a.addEventListener('click', closeMenu));
+        document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeMenu(); });
+        document.addEventListener('click', (e)=>{ if(!menu.contains(e.target) && !btn.contains(e.target)) closeMenu(); });
+      })();
+    </script>
+  </body>
+  </html>

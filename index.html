@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="da">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Vandkanonkonge · Michael</title>
+    <meta name="description" content="Historien om Michael – Vandkanonkonge. Oplev præstationen, del reaktioner og book Michael til at fortælle om det." />
+
+    <!-- Fonts (Material-like: Poppins + Inter) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="img/VandkanonLogo.png">
+    <link rel="preload" as="image" href="img/skud.gif" fetchpriority="high">
+
+    <!-- Tailwind via CDN for fast prototyping -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'system-ui', 'ui-sans-serif', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', 'sans-serif'],
+              display: ['Poppins', 'Inter', 'system-ui', 'sans-serif']
+            },
+            colors: {
+              brand: {
+                50: '#f0f9ff', // water-light background
+                100: '#e0f2fe',
+                200: '#bae6fd',
+                300: '#7dd3fc',
+                400: '#38bdf8',
+                500: '#0ea5e9', // primary
+                600: '#0284c7',
+                700: '#0369a1',
+                800: '#075985',
+                900: '#0c4a6e'
+              }
+            },
+            boxShadow: {
+              e1: '0 1px 2px 0 rgb(0 0 0 / 0.04), 0 1px 3px 0 rgb(0 0 0 / 0.08)',
+              e2: '0 6px 16px -4px rgb(2 132 199 / 0.10), 0 2px 8px -2px rgb(2 132 199 / 0.08)'
+            },
+            keyframes: {
+              marquee: {
+                '0%': { transform: 'translateX(0)' },
+                '100%': { transform: 'translateX(-50%)' }
+              }
+            },
+            animation: {
+              marquee: 'marquee 30s linear infinite'
+            }
+          }
+        }
+      }
+    </script>
+
+    <style>
+      /* Smooth scrolling for in-page anchors */
+      html { scroll-behavior: smooth; }
+
+      /* Claims: subtle radial wash via pseudo-element */
+      #claims { position: relative; }
+      #claims::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background: radial-gradient(60% 50% at 50% 0%, rgba(14,165,233,0.08), transparent 70%);
+      }
+
+      /* Reveal animation for claims */
+      .claim { opacity: 0; transform: translateY(16px); transition: opacity 700ms ease, transform 700ms ease; }
+      .claim.is-visible { opacity: 1; transform: translateY(0); }
+
+      /* Subtle highlight flash for emphasized spans inside visible claims */
+      @keyframes highlightFlash {
+        0% { box-shadow: inset 0 0 0 0 rgba(14,165,233,0.0); }
+        40% { box-shadow: inset 0 0 0 6px rgba(14,165,233,0.15); }
+        100% { box-shadow: inset 0 0 0 0 rgba(14,165,233,0.0); }
+      }
+      .claim.is-visible .flash-on-reveal { animation: none !important; }
+
+      /* Override existing claim highlight spans to look hand-drawn and avoid overlap */
+      #claims blockquote span {
+        margin: 0 !important;                 /* remove negative margins */
+        border-radius: 0 !important;           /* no rounded pills */
+        background-color: transparent !important; /* remove flat bg color only */
+        -webkit-box-decoration-break: clone;
+        box-decoration-break: clone;
+        padding: 0 .15em;
+        background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 28' preserveAspectRatio='none'><path d='M3 8 Q 15 4 30 8 T 60 8 T 90 8 Q 96 9 98 12 L 98 18 Q 85 22 70 18 T 40 18 T 10 18 Q 4 17 3 14 Z' fill='%23ffec70'/></svg>");
+        background-repeat: no-repeat;          /* one per line fragment */
+        background-size: 100% 1.25em;         /* fill the line height */
+        background-position: 0 0.1em;         /* slightly offset for hand-drawn feel */
+      }
+
+      /* Remove auto-inserted Claims intro and decorative quote marks */
+      [data-claims-intro] { display: none !important; }
+      [data-quote-mark] { display: none !important; }
+      .claim-extra { display: none !important; }
+
+      /* Active nav link styling */
+      #main-nav .nav-link.is-active { color: #0ea5e9; }
+
+      /* Hand-drawn style highlighter that stays within the word */
+      .marker {
+        -webkit-box-decoration-break: clone;
+        box-decoration-break: clone;
+        padding: 0 .15em;
+        background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 28' preserveAspectRatio='none'><path d='M3 8 Q 15 4 30 8 T 60 8 T 90 8 Q 96 9 98 12 L 98 18 Q 85 22 70 18 T 40 18 T 10 18 Q 4 17 3 14 Z' fill='%23ffec70'/></svg>");
+        background-repeat: no-repeat;
+        background-size: 100% 1.25em;
+        background-position: 0 0.1em;
+      }
+
+      
+    </style>
+  </head>
+  <body class="antialiased bg-white text-slate-900">
+    <!-- Navbar (simplified) -->
+    <header class="hidden">
+      <nav class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        <a href="#" class="flex items-center gap-2 font-display text-xl font-semibold tracking-tight">
+          <span class="inline-flex h-8 w-8 items-center justify-center rounded-xl bg-brand-100 text-brand-700 shadow-e1">💧</span>
+          <span>Vandkanonkonge</span>
+        </a>
+      </nav>
+    </header>
+
+    <!-- Navbar inspired by Fredsly project (no search/CTA) -->
+    <header class="sticky top-0 z-40 bg-white/90 backdrop-blur border-b border-slate-200 relative">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
+        <!-- Left: Simple text logo -->
+        <a href="index.html" class="flex items-center" aria-label="Start">
+          <img src="img/VandkanonLogo.png" alt="Vandkanon" class="h-8 w-auto" />
+        </a>
+
+        <!-- Center: Primary nav (desktop) -->
+        <nav id="main-nav" class="hidden md:flex relative md:absolute md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2 items-center gap-8 text-sm font-extrabold tracking-wide uppercase text-slate-900" role="navigation" aria-label="Primary">
+          <a href="index.html" data-target="start" class="nav-link py-2">Start</a>
+          <a href="materialer.html" data-target="materialer" class="nav-link py-2">Materialer</a>
+          <a href="historie.html" data-target="historie" class="nav-link py-2">Historie</a>
+          <span id="nav-indicator" class="pointer-events-none absolute -bottom-1 h-1 rounded-full bg-[#e8f6fe] transition-all duration-300"></span>
+        </nav>
+
+        <!-- Right: Facebook link + Mobile burger -->
+        <div class="flex items-center gap-2">
+          <a href="https://www.facebook.com/mhlillelund" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="hidden md:inline-flex h-10 w-10 items-center justify-center rounded-lg ring-1 ring-[#1877F2]/30 text-[#1877F2] hover:bg-[#1877F2]/10 transition-transform duration-150 hover:scale-[1.03]">
+            <svg viewBox="0 0 24 24" class="h-6 w-6 fill-current" aria-hidden="true"><path d="M13.5 9H15V6h-1.5A3.5 3.5 0 0 0 10 9.5V11H8v3h2v7h3v-7h2.1l.4-3H13v-1a1 1 0 0 1 1-1Z"/></svg>
+          </a>
+          <button id="nav-toggle" type="button" class="md:hidden inline-flex items-center justify-center h-9 w-9 rounded-lg ring-1 ring-slate-200 text-slate-700 hover:bg-slate-50" aria-controls="mobile-menu" aria-expanded="false" aria-label="Åbn menu">
+            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile dropdown menu -->
+      <div id="mobile-menu" class="md:hidden hidden absolute inset-x-0 top-14 z-30 bg-white/95 backdrop-blur border-b border-slate-200 shadow-e1">
+        <nav class="px-4 py-4 flex flex-col gap-2 text-sm font-extrabold uppercase tracking-wide text-slate-900" aria-label="Mobil">
+          <a href="index.html" class="py-2">Start</a>
+          <a href="materialer.html" class="py-2">Materialer</a>
+          <a href="historie.html" class="py-2">Historie</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="relative">
+      <div class="absolute inset-0 -z-10 bg-gradient-to-b from-brand-50 to-white"></div>
+
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-16 pb-8 lg:pt-24 lg:pb-10">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+          <!-- Copy -->
+          <div>
+            <h1 class="mt-5 font-display text-4xl sm:text-5xl font-bold tracking-tight text-slate-900">
+              Michael — Vandkanonkonge
+            </h1>
+            <p class="mt-4 text-lg leading-relaxed text-slate-700">
+              Historien om vandkraft, præcision og glæde. Oplev præstationen bag titlen, del reaktioner, og book Michael til at fortælle om det.
+            </p>
+          </div>
+
+          <!-- Visual placeholder -->
+          <div class="relative">
+            <div class="relative overflow-hidden rounded-3xl border border-slate-200 bg-gradient-to-br from-brand-100 via-sky-100 to-white shadow-xl">
+              <!-- Decorative wave -->
+              <svg aria-hidden="true" viewBox="0 0 1200 300" preserveAspectRatio="none" class="absolute -bottom-10 left-0 right-0 h-48 w-full text-brand-200">
+                <path d="M0,192L120,208C240,224,480,256,720,245.3C960,235,1200,181,1200,181L1200,320L0,320Z" fill="currentColor" />
+              </svg>
+              <div class="relative aspect-[4/3] sm:aspect-[16/10] md:aspect-[5/3] flex items-center justify-center">
+                <img id="hero-gif" src="img/skud.gif" alt="Hero billede" fetchpriority="high" decoding="async" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-300" />
+                <button id="hero-replay" type="button" class="absolute bottom-3 right-3 z-10 inline-flex items-center gap-2 rounded-full bg-white/80 ring-1 ring-slate-300 px-3 py-1.5 text-xs font-semibold text-slate-800 shadow-e1 backdrop-blur hover:bg-white hover:ring-slate-400">
+                  <svg viewBox="0 0 24 24" class="h-4 w-4 fill-current" aria-hidden="true"><path d="M12 5V2L8 6l4 4V7a5 5 0 1 1-5 5H5a7 7 0 1 0 7-7Z"/></svg>
+                  Afspil igen
+                </button>
+                <div class="text-center px-6 py-10 hidden">
+                  <div class="mx-auto inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-white/80 border border-slate-200 shadow-e1 backdrop-blur text-brand-600">📸</div>
+                  <p class="mt-4 text-sm text-slate-600">Pladsholder for hero-billede/video</p>
+                  <p class="mt-1 text-xs text-slate-500">Vi udskifter, når vi har et billede i høj kvalitet</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Partners marquee integrated in hero (no boxed container) -->
+      <div class="px-4 sm:px-6 lg:px-8 pb-10">
+        <div class="mx-auto max-w-7xl">
+          <div>
+            <div class="flex items-center gap-3 px-1">
+              <span class="text-xs font-medium uppercase tracking-wide text-slate-500">Samarbejdspartnere</span>
+              <span class="h-[1px] flex-1 bg-slate-200"></span>
+            </div>
+            <div class="relative overflow-hidden">
+              <!-- edge fades only over the marquee row -->
+              <div class="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-white/90 to-transparent"></div>
+              <div class="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-white/90 to-transparent"></div>
+              <ul class="flex gap-10 w-max animate-marquee will-change-transform py-4 pr-24">
+                <!-- one set: real partner logos, free (no wrapper) -->
+                <li class="flex items-center h-12">
+                  <img src="partnere/AK2-logo.png" alt="AK2" class="h-10 w-auto object-contain" />
+                </li>
+                <li class="flex items-center h-12">
+                  <img src="partnere/BJ-logo.png" alt="BJ" class="h-10 w-auto object-contain" />
+                </li>
+                <li class="flex items-center h-12">
+                  <img src="partnere/ksn-logo.png" alt="KSN" class="h-10 w-auto object-contain" />
+                </li>
+                <li class="flex items-center h-12">
+                  <img src="partnere/Scanregn-logo.png" alt="Scanregn" class="h-10 w-auto object-contain" />
+                </li>
+                <li class="flex items-center h-12">
+                  <img src="partnere/svendmadsen-logo.jpg" alt="Svend Madsen" class="h-10 w-auto object-contain" />
+                </li>
+                <li class="flex items-center h-12">
+                  <img src="partnere/bitbrew-logo.png" alt="Bitbrew" class="h-10 w-auto object-contain" />
+                </li>
+                <li class="flex items-center h-12">
+                  <img src="partnere/gsv-logo.png" alt="GSV" class="h-10 w-auto object-contain" />
+                </li>
+                <li class="flex items-center h-12">
+                  <img src="partnere/jpbc-logo.png" alt="JPBC" class="h-10 w-auto object-contain" />
+                </li>
+                <li class="flex items-center h-12">
+                  <img src="partnere/jyskebank-logo.png" alt="Jyske Bank" class="h-10 w-auto object-contain" />
+                </li>
+                <li class="flex items-center h-12">
+                  <img src="partnere/stsbiler-logo.png" alt="STS Biler" class="h-10 w-auto object-contain" />
+                </li>
+                <li class="flex items-center h-12">
+                  <img src="partnere/xlbyg-logo.png" alt="XL-BYG" class="h-10 w-auto object-contain" />
+                </li>
+                <!-- duplicate set for seamless loop -->
+                <li class="flex items-center h-12">
+                  <img src="partnere/AK2-logo.png" alt="AK2" class="h-10 w-auto object-contain" />
+                </li>
+                <li class="flex items-center h-12">
+                  <img src="partnere/BJ-logo.png" alt="BJ" class="h-10 w-auto object-contain" />
+                </li>
+                <li class="flex items-center h-12">
+                  <img src="partnere/ksn-logo.png" alt="KSN" class="h-10 w-auto object-contain" />
+                </li>
+                <li class="flex items-center h-12">
+                  <img src="partnere/Scanregn-logo.png" alt="Scanregn" class="h-10 w-auto object-contain" />
+                </li>
+                <li class="flex items-center h-12">
+                  <img src="partnere/svendmadsen-logo.jpg" alt="Svend Madsen" class="h-10 w-auto object-contain" />
+                </li>
+                <li class="flex items-center h-12">
+                  <img src="partnere/bitbrew-logo.png" alt="Bitbrew" class="h-10 w-auto object-contain" />
+                </li>
+                <li class="flex items-center h-12">
+                  <img src="partnere/gsv-logo.png" alt="GSV" class="h-10 w-auto object-contain" />
+                </li>
+                <li class="flex items-center h-12">
+                  <img src="partnere/jpbc-logo.png" alt="JPBC" class="h-10 w-auto object-contain" />
+                </li>
+                <li class="flex items-center h-12">
+                  <img src="partnere/jyskebank-logo.png" alt="Jyske Bank" class="h-10 w-auto object-contain" />
+                </li>
+                <li class="flex items-center h-12">
+                  <img src="partnere/stsbiler-logo.png" alt="STS Biler" class="h-10 w-auto object-contain" />
+                </li>
+                <li class="flex items-center h-12">
+                  <img src="partnere/xlbyg-logo.png" alt="XL-BYG" class="h-10 w-auto object-contain" />
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Claims section (emphasized as statements, not official records) -->
+    <section id="claims" class="relative bg-brand-50/60">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20">
+        <div class="space-y-24">
+          <!-- Claim 1 -->
+          <article>
+            <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+              <!-- Image -->
+              <figure class="order-2 lg:order-2 lg:col-span-5 relative h-56 sm:h-72 lg:h-[380px] aspect-[4/3]">
+                <img src="https://placehold.co/900x700/eff6ff/0ea5e9?text=Michael%20/%20Vandkanonkonge&font=inter" alt="Michael – Vandkanonkonge (placeholder)" class="absolute inset-0 w-full h-full object-cover rounded-3xl shadow-e2" />
+              </figure>
+              <!-- Text -->
+              <div class="order-1 lg:order-1 lg:col-span-7 py-2">
+                <blockquote class="mt-1 text-slate-900">
+                  <p class="text-3xl sm:text-4xl lg:text-5xl leading-snug font-semibold max-w-[30ch] sm:max-w-[36ch]">
+                    “Jeg er den 
+                    <span class="box-decoration-clone rounded px-1 -mx-0.5 bg-brand-200/60">første</span>
+                    person til at blive skudt ud af en 
+                    <span class="box-decoration-clone rounded px-1 -mx-0.5 bg-brand-200/60">vandkanon</span>
+                    og dermed den 
+                    <span class="box-decoration-clone rounded px-1 -mx-0.5 bg-brand-200/60">første vandkanonkonge</span>.”
+                  </p>
+                </blockquote>
+              </div>
+            </div>
+          </article>
+
+          <!-- Claim 2 (alternating layout, no box) -->
+          <article>
+            <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+              <!-- Image (left on desktop) -->
+              <figure class="lg:order-1 lg:col-span-5 relative h-56 sm:h-72 lg:h-[380px] aspect-[4/3]">
+                <img src="https://placehold.co/900x700/eff6ff/0ea5e9?text=Vandkanon&font=inter" alt="Vandkanon – konstruktion (placeholder)" class="absolute inset-0 w-full h-full object-cover rounded-3xl shadow-e2" />
+              </figure>
+              <!-- Text -->
+              <div class="lg:order-2 lg:col-span-7 py-2">
+                <blockquote class="mt-1 text-slate-900">
+                  <p class="text-3xl sm:text-4xl lg:text-5xl leading-snug font-semibold max-w-[30ch] sm:max-w-[36ch]">
+                    “Sammen med mine samarbejdspartnere har jeg bygget 
+                    <span class="box-decoration-clone rounded px-1 -mx-0.5 bg-amber-200/60">verdens største</span>
+                    <span class="box-decoration-clone rounded px-1 -mx-0.5 bg-brand-200/60">vandkanon</span>.”
+                  </p>
+                </blockquote>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      // Sliding underline indicator for navbar (simplified)
+      (function(){
+        const nav = document.getElementById('main-nav');
+        const indicator = document.getElementById('nav-indicator');
+        if (!nav || !indicator) return;
+        const links = Array.from(nav.querySelectorAll('.nav-link'));
+        const current = location.pathname.split('/').pop() || 'index.html';
+        let active = links.find(a => (a.getAttribute('href')||'') === current) || links[0];
+        function setActive(el){
+          links.forEach(x=>{ x.classList.remove('is-active'); x.removeAttribute('aria-current'); });
+          el.classList.add('is-active');
+          el.setAttribute('aria-current','page');
+        }
+        function positionIndicator(el){
+          const navBox = nav.getBoundingClientRect();
+          const box = el.getBoundingClientRect();
+          const factor = 0.7; // make indicator shorter than link width
+          const width = Math.round(box.width * factor);
+          const left = Math.round((box.left - navBox.left) + (box.width - width) / 2);
+          indicator.style.left = left + 'px';
+          indicator.style.width = width + 'px';
+        }
+        links.forEach((a)=>{
+          a.addEventListener('mouseenter',()=>positionIndicator(a));
+          a.addEventListener('focus',()=>positionIndicator(a));
+          a.addEventListener('click',()=>{ active = a; setActive(active); });
+        });
+        nav.addEventListener('mouseleave',()=>positionIndicator(active));
+        window.addEventListener('load',()=>{ setActive(active); positionIndicator(active); });
+        window.addEventListener('resize',()=>positionIndicator(active));
+      })();
+
+      // Mobile menu toggle (burger)
+      (function(){
+        const btn = document.getElementById('nav-toggle');
+        const menu = document.getElementById('mobile-menu');
+        if (!btn || !menu) return;
+
+        function openMenu(){
+          menu.classList.remove('hidden');
+          btn.setAttribute('aria-expanded', 'true');
+        }
+        function closeMenu(){
+          menu.classList.add('hidden');
+          btn.setAttribute('aria-expanded', 'false');
+        }
+        function toggle(){
+          const isOpen = btn.getAttribute('aria-expanded') === 'true';
+          if (isOpen) closeMenu(); else openMenu();
+        }
+
+        btn.addEventListener('click', toggle);
+
+        // Close when clicking a link in the mobile menu
+        menu.querySelectorAll('a').forEach(a=>a.addEventListener('click', closeMenu));
+        // Close on Escape
+        document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeMenu(); });
+        // Close on outside click
+        document.addEventListener('click', (e)=>{
+          if (!menu.contains(e.target) && !btn.contains(e.target)) closeMenu();
+        });
+      })();
+
+      // Hero GIF replay button (resets src to restart animation)
+      (function(){
+        const img = document.getElementById('hero-gif');
+        const btn = document.getElementById('hero-replay');
+        if (!img || !btn) return;
+        function replay(){
+          const base = 'img/skud.gif';
+          img.style.opacity = '0.01';
+          img.addEventListener('load', () => { img.style.opacity = '1'; }, { once: true });
+          img.src = base + '?t=' + Date.now();
+        }
+        btn.addEventListener('click', replay);
+      })();
+
+      // Replace claim images with real assets
+      document.querySelectorAll('#claims article figure img').forEach((img, i) => {
+        if (i === 0) { img.src = 'img/konge.jpg'; img.alt = 'Michael – Vandkanonkonge'; }
+        if (i === 1) { img.src = 'img/kanon.jpg'; img.alt = 'Vandkanon – konstruktion'; }
+      });
+    </script>
+    <script>
+      // Enhance claims: intro, visuals, reveal, narrative
+      (function(){
+        const section = document.getElementById('claims');
+        if (!section) return;
+
+        // Add intro block if missing
+        const container = section.querySelector('div.mx-auto');
+        const existingIntro = container && container.querySelector('[data-claims-intro]');
+        if (container && !existingIntro) {
+          const intro = document.createElement('div');
+          intro.setAttribute('data-claims-intro', '');
+          intro.className = 'max-w-3xl mb-12';
+          intro.innerHTML = `
+            <span class="inline-flex items-center gap-2 rounded-full bg-white/70 ring-1 ring-brand-200 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-brand-700">Claims</span>
+            <h2 class="mt-4 font-display text-2xl sm:text-3xl font-bold tracking-tight">Det vi påstår – og hvorfor</h2>
+            <p class="mt-2 text-slate-600">Vores vigtigste claims, fortalt som korte nedslag i historien. Ikke officielle rekorder – men sandheden, sådan som vi oplevede den.</p>
+          `;
+          const list = container.querySelector('.space-y-24');
+          if (list) container.insertBefore(intro, list);
+        }
+
+        // Decorate each claim article and blockquote
+        const articles = section.querySelectorAll('article');
+        articles.forEach((article, i) => {
+          article.classList.add('claim');
+          const bq = article.querySelector('blockquote');
+          if (!bq) return;
+          bq.classList.add('relative');
+
+          // Decorative quote mark
+          if (!bq.querySelector('[data-quote-mark]')) {
+            bq.insertAdjacentHTML('afterbegin', `
+              <div data-quote-mark class="absolute -top-6 -left-4 text-brand-200 select-none" aria-hidden="true" title="citat">
+                <svg width="64" height="64" viewBox="0 0 24 24" fill="currentColor" class="opacity-60"><path d="M7.17 6A5.17 5.17 0 0 0 2 11.17v6.16A.67.67 0 0 0 2.67 18h6.16a.67.67 0 0 0 .67-.67v-6.16A5.17 5.17 0 0 0 4.33 6Zm12 0A5.17 5.17 0 0 0 14 11.17v6.16a.67.67 0 0 0 .67.67h6.16a.67.67 0 0 0 .67-.67v-6.16A5.17 5.17 0 0 0 16.33 6Z"/></svg>
+              </div>
+            `);
+          }
+
+          // Add flash-on-reveal to highlighted spans
+          bq.querySelectorAll('span').forEach(s => s.classList.add('flash-on-reveal'));
+
+          // Add narrative + CTA once
+          if (!bq.querySelector('.claim-extra')) {
+            const extra = document.createElement('div');
+            extra.className = 'claim-extra';
+            let text = '';
+            let href = '#';
+            let cta = 'Læs mere';
+            if (i === 0) {
+              text = 'Idéen lød vanvittig. Med de rigtige folk, sikkerhed og præcision lykkedes det – og viste, hvad systemet faktisk kan.';
+              href = 'historie.html';
+              cta = 'Læs historien';
+            } else if (i === 1) {
+              text = 'Ikke kun for rekorden – men for at flytte grænserne for, hvad vandtryk kan bruges til i praksis.';
+              href = 'materialer.html';
+              cta = 'Se hvordan';
+            }
+            extra.innerHTML = `
+              <p class="mt-4 text-slate-600 max-w-prose">${text}</p>
+              <a href="${href}" class="mt-4 inline-flex items-center gap-2 text-brand-700 font-semibold hover:text-brand-800">
+                ${cta}
+                <svg viewBox="0 0 24 24" class="h-5 w-5 fill-current"><path d="M5 12h12m-4-4 4 4-4 4" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+            `;
+            bq.appendChild(extra);
+          }
+
+          // Fix alt text on images in this claim (best-effort)
+          const img = article.querySelector('figure img');
+          if (img) {
+            if (i === 0) img.alt = 'Michael – Vandkanonkonge (placeholder)';
+            if (i === 1) img.alt = 'Vandkanon – konstruktion (placeholder)';
+          }
+        });
+
+        // Reveal on scroll
+        const observer = new IntersectionObserver((entries)=>{
+          for (const entry of entries) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          }
+        }, { rootMargin: '0px 0px -10% 0px', threshold: 0.15 });
+        section.querySelectorAll('.claim').forEach(el=>observer.observe(el));
+      })();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="da">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Historie · Idé → Plan – Vandkanon</title>
+    <meta name="description" content="Scrollytelling med to sektioner: idéen og fra tanke til planlægning." />
+    <link rel="icon" type="image/png" href="img/VandkanonLogo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter','system-ui','ui-sans-serif','Segoe UI','Roboto','Helvetica','Arial','sans-serif'],
+              display: ['Poppins','Inter','system-ui','sans-serif']
+            },
+            colors: {
+              brand: {50:'#f0f9ff',100:'#e0f2fe',200:'#bae6fd',300:'#7dd3fc',400:'#38bdf8',500:'#0ea5e9',600:'#0284c7',700:'#0369a1',800:'#075985',900:'#0c4a6e'}
+            },
+            boxShadow: {
+              e1: '0 1px 2px 0 rgb(0 0 0 / 0.04), 0 1px 3px 0 rgb(0 0 0 / 0.08)'
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      html { scroll-behavior: smooth }
+      :root { --nav-h: 56px; } /* matches h-14 */
+      #main-nav .nav-link.is-active { color: #0ea5e9 }
+
+      /* Slides scrollytelling: one pinned viewport, content swaps */
+      .slides { min-height: 300vh; }
+      .slides-pin { position: sticky; top: var(--nav-h); height: calc(100vh - var(--nav-h)); }
+      .slides-viewport { position: relative; height: 100%; display: grid; place-items: center; }
+      .slide { position: absolute; inset: 0; display: grid; align-items: center; justify-items: center; opacity: 0; transform: translateX(20px); transition: opacity .6s ease, transform .6s ease; }
+      .slide-inner { width: 100%; height: 100%; }
+      @media (min-width: 640px){
+        .slide-inner { transform: scale(.85); transform-origin: center; }
+      }
+      .slide.is-active { opacity: 1; transform: translateX(0); z-index: 1; }
+      .slide.is-prev { opacity: 0; transform: translateX(-20px); z-index: 0; }
+      #scrollHint { transition: opacity .3s ease; }
+      @keyframes hintBounce { 0%,100% { transform: translate(-50%,0); } 50% { transform: translate(-50%,8px); } }
+
+      /* Section-like text card */
+      .text-card { background: rgba(255,255,255,0.96); border: 1px solid rgba(148,163,184,.35); border-radius: 1rem; box-shadow: 0 10px 30px -12px rgba(2,132,199,.18); padding: 1.25rem; }
+      @media (min-width: 640px){ .text-card { padding: 1.5rem; } }
+      @media (min-width: 1024px){ .text-card { padding: 2rem; } }
+
+      /* Text‑first timeline + stats */
+      .tl { position: relative; padding-left: 1rem; }
+      .tl::before { content: ""; position: absolute; left: 6px; top: 0; bottom: 0; width: 2px; background: rgba(2,6,23,.12); border-radius: 999px; }
+      .tl-item { position: relative; padding-left: .75rem; margin-bottom: 1rem; }
+      .tl-item::before { content: ""; position: absolute; left: -2px; top: .35rem; width: 10px; height: 10px; background: #0ea5e9; border-radius: 999px; box-shadow: 0 0 0 3px rgba(14,165,233,.18); }
+      .kpi { border-radius: .75rem; background: #fff; border: 1px solid rgba(148,163,184,.35); box-shadow: 0 10px 30px -12px rgba(2,132,199,.12); padding: .9rem; text-align: center; }
+      .kpi .num { font-weight: 800; letter-spacing: -.02em; }
+      .bar { height: 6px; border-radius: 999px; background: rgba(2,6,23,.12); overflow: hidden; }
+      .bar > i { display: block; height: 100%; width: 0%; background: #0ea5e9; border-radius: 999px; }
+      .panel { border-radius: 1.25rem; overflow: hidden; box-shadow: 0 10px 30px -12px rgba(2,132,199,.2); border: 1px solid rgba(148,163,184,.35) }
+      .illus { display: inline-flex; align-items: center; gap: 10px; padding: .5rem .75rem; border-radius: .75rem; background: rgba(14,165,233,.08); border: 1px solid rgba(14,165,233,.25); color: #0369a1 }
+
+      @media (prefers-reduced-motion: reduce) {
+        .stage { transition: none !important }
+      }
+    </style>
+  </head>
+  <body class="antialiased bg-white text-slate-900">
+    <!-- Navbar (samme som index) -->
+    <header class="sticky top-0 z-40 bg-white/90 backdrop-blur border-b border-slate-200 relative">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
+        <!-- Venstre: logo -->
+        <a href="index.html" class="flex items-center" aria-label="Start">
+          <img src="img/VandkanonLogo.png" alt="Vandkanon" class="h-8 w-auto" />
+        </a>
+        <!-- Center: nav -->
+        <nav id="main-nav" class="hidden md:flex relative md:absolute md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2 items-center gap-8 text-sm font-extrabold tracking-wide uppercase text-slate-900" aria-label="Primary">
+          <a href="index.html" class="nav-link py-2">Start</a>
+          <a href="materialer.html" class="nav-link py-2">Materialer</a>
+          <a href="historie.html" class="nav-link py-2">Historie</a>
+          <span id="nav-indicator" class="pointer-events-none absolute -bottom-1 h-1 rounded-full bg-[#e8f6fe] transition-all duration-300"></span>
+        </nav>
+        <!-- Højre: FB + burger -->
+        <div class="flex items-center gap-2">
+          <a href="https://www.facebook.com/mhlillelund" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="hidden md:inline-flex h-10 w-10 items-center justify-center rounded-lg ring-1 ring-[#1877F2]/30 text-[#1877F2] hover:bg-[#1877F2]/10 transition-transform duration-150 hover:scale-[1.03]">
+            <svg viewBox="0 0 24 24" class="h-6 w-6 fill-current" aria-hidden="true"><path d="M13.5 9H15V6h-1.5A3.5 3.5 0 0 0 10 9.5V11H8v3h2v7h3v-7h2.1l.4-3H13v-1a1 1 0 0 1 1-1Z"/></svg>
+          </a>
+          <button id="nav-toggle" type="button" class="md:hidden inline-flex items-center justify-center h-9 w-9 rounded-lg ring-1 ring-slate-200 text-slate-700 hover:bg-slate-50" aria-controls="mobile-menu" aria-expanded="false" aria-label="Åbn menu">
+            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div id="mobile-menu" class="md:hidden hidden absolute inset-x-0 top-14 z-30 bg-white/95 backdrop-blur border-b border-slate-200 shadow-e1">
+        <nav class="px-4 py-4 flex flex-col gap-2 text-sm font-extrabold uppercase tracking-wide text-slate-900" aria-label="Mobil">
+          <a href="index.html" class="py-2">Start</a>
+          <a href="materialer.html" class="py-2">Materialer</a>
+          <a href="historie.html" class="py-2">Historie</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <!-- Slides: én pinned viewport; indhold skifter ved scroll -->
+      <section class="slides">
+        <div class="slides-pin">
+          <div class="slides-viewport">
+            <!-- Slide 1: Idéen (billede venstre) -->
+            <div class="slide" data-i="0">
+              <div class="slide-inner w-full h-full px-6 sm:px-8 lg:px-12">
+                <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center h-full">
+                  <figure class="lg:col-span-5 panel h-full">
+                    <img src="img/konge.jpg" alt="Idé – Vandkanonkonge" class="w-full h-full object-cover" />
+                  </figure>
+                  <div class="lg:col-span-7">
+                    <div class="text-card">
+                      <h1 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">Komponent‑eksempler</h1>
+                      <p class="mt-2 text-slate-700">En lille “lorem ipsum” showcase af forskellige bokse vi kan bruge til at formidle historien.</p>
+
+                      <div class="mt-5 grid gap-4 sm:grid-cols-2">
+                        <!-- Info box -->
+                        <div class="rounded-xl bg-brand-50 ring-1 ring-brand-100 p-4">
+                          <div class="text-sm font-semibold text-brand-800">Info</div>
+                          <p class="mt-1 text-slate-700 text-sm">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.</p>
+                        </div>
+
+                        <!-- Success box -->
+                        <div class="rounded-xl bg-emerald-50 ring-1 ring-emerald-100 p-4">
+                          <div class="text-sm font-semibold text-emerald-800">Succes</div>
+                          <p class="mt-1 text-slate-700 text-sm">Ut labore et dolore magna aliqua — alt ser godt ud.</p>
+                        </div>
+
+                        <!-- Warning box -->
+                        <div class="rounded-xl bg-amber-50 ring-1 ring-amber-100 p-4">
+                          <div class="text-sm font-semibold text-amber-800">Advarsel</div>
+                          <p class="mt-1 text-slate-700 text-sm">Vær opmærksom på tryk og sikkerhedsafstande i denne fase.</p>
+                        </div>
+
+                        <!-- Quote box -->
+                        <div class="rounded-xl bg-white ring-1 ring-slate-200 p-4">
+                          <blockquote class="italic text-slate-700 text-sm">“Lorem ipsum dolor sit amet — små, klare pointer holder læseren med.”</blockquote>
+                        </div>
+
+                        <!-- Checklist -->
+                        <div class="rounded-xl bg-white ring-1 ring-slate-200 p-4">
+                          <div class="text-sm font-semibold text-slate-900">Tjekliste</div>
+                          <ul class="mt-2 space-y-1 text-sm text-slate-700">
+                            <li class="flex items-center gap-2"><span class="inline-block h-4 w-4 rounded bg-emerald-500"></span> Materialer klar</li>
+                            <li class="flex items-center gap-2"><span class="inline-block h-4 w-4 rounded bg-emerald-500"></span> Roller aftalt</li>
+                            <li class="flex items-center gap-2"><span class="inline-block h-4 w-4 rounded bg-slate-300"></span> Test planlagt</li>
+                          </ul>
+                        </div>
+
+                        <!-- CTA / Link card -->
+                        <a href="materialer.html" class="rounded-xl bg-white ring-1 ring-slate-200 p-4 hover:ring-brand-300 transition">
+                          <div class="text-sm font-semibold text-slate-900">Læs mere</div>
+                          <p class="mt-1 text-sm text-slate-700">Gå i dybden med materialer, trin og dokumenter.</p>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 2: Planlægning (billede højre) -->
+            <div class="slide" data-i="1">
+              <div class="slide-inner w-full h-full px-6 sm:px-8 lg:px-12">
+                <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center h-full">
+                  <div class="lg:order-1 lg:col-span-7">
+                    <div class="text-card">
+                      <div class="flex flex-col gap-4 sm:gap-6">
+                        <h2 class="font-display text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight">Planen tager form</h2>
+                        <p class="text-lg sm:text-xl text-slate-700">Vi omsætter idéen til trin: materialer, konstruktion, sikkerhed og test. Tidsplan, roller og dokumentation gør projektet klart.</p>
+
+                        <hr class="border-slate-200/70">
+
+                        <div class="grid sm:grid-cols-2 gap-4">
+                          <div>
+                            <h3 class="font-semibold text-slate-900">Trin</h3>
+                            <ol class="mt-2 list-decimal pl-5 text-slate-700 text-sm sm:text-base space-y-1">
+                              <li>Materialeliste</li>
+                              <li>Konstruktion</li>
+                              <li>Test & dokumentation</li>
+                            </ol>
+                          </div>
+                          <div>
+                            <h3 class="font-semibold text-slate-900">Roller</h3>
+                            <ul class="mt-2 list-disc pl-5 text-slate-700 text-sm sm:text-base space-y-1">
+                              <li>Ansvarlig for sikkerhed</li>
+                              <li>Byg & montage</li>
+                              <li>Foto/video</li>
+                            </ul>
+                          </div>
+                        </div>
+
+                        <div class="grid grid-cols-3 gap-3 pt-1">
+                          <div class="rounded-lg bg-brand-50 ring-1 ring-brand-100 px-3 py-2 text-center">
+                            <div class="text-xs text-slate-500">Status</div>
+                            <div class="text-sm font-semibold text-brand-700">Klar</div>
+                          </div>
+                          <div class="rounded-lg bg-brand-50 ring-1 ring-brand-100 px-3 py-2 text-center">
+                            <div class="text-xs text-slate-500">Risiko</div>
+                            <div class="text-sm font-semibold text-brand-700">Kontrolleret</div>
+                          </div>
+                          <div class="rounded-lg bg-brand-50 ring-1 ring-brand-100 px-3 py-2 text-center">
+                            <div class="text-xs text-slate-500">Dokumentation</div>
+                            <div class="text-sm font-semibold text-brand-700">På plads</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <figure class="lg:order-2 lg:col-span-5 panel h-full">
+                    <img src="img/kanon.jpg" alt="Planlægning – Vandkanon" class="w-full h-full object-cover" />
+                  </figure>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 3: Tekst‑tidslinje og statistik -->
+            <div class="slide" data-i="2">
+              <div class="slide-inner w-full h-full px-6 sm:px-8 lg:px-12">
+                <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center h-full">
+                  <!-- Tekst‑tidslinje -->
+                  <div class="lg:col-span-7">
+                    <div class="text-card">
+                      <h2 class="font-display text-4xl sm:text-5xl font-semibold tracking-tight">Fra idé til handling</h2>
+                      <p class="mt-2 text-slate-700">Tidslinje med korte, teksttunge nedslag der fortæller, hvad der faktisk skete.</p>
+                      <div class="mt-4 tl">
+                        <div class="tl-item">
+                          <div class="text-sm text-slate-500">2018 · Idé</div>
+                          <div class="font-semibold">Skitsen fødes</div>
+                          <p class="text-slate-700 text-sm">Vi formulerer formål, sikkerhedsprincipper og succes‑kriterier.</p>
+                        </div>
+                        <div class="tl-item">
+                          <div class="text-sm text-slate-500">2019 · Byg</div>
+                          <div class="font-semibold">Delene samles</div>
+                          <p class="text-slate-700 text-sm">Rør, beslag, dyse og trykbeholder. Trailer‑riggen justeres.</p>
+                        </div>
+                        <div class="tl-item">
+                          <div class="text-sm text-slate-500">2020 · Test</div>
+                          <div class="font-semibold">Gentag og lær</div>
+                          <p class="text-slate-700 text-sm">Tryk og dyse finjusteres. Alt dokumenteres, så vi kan forklare hvorfor.</p>
+                        </div>
+                        <div class="tl-item">
+                          <div class="text-sm text-slate-500">2023 · Rekord</div>
+                          <div class="font-semibold">Skuddet</div>
+                          <p class="text-slate-700 text-sm">Systemet leverer. Publikum reagerer, historien deles.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Statistik / KPI'er -->
+                  <div class="lg:col-span-5">
+                    <div class="grid grid-cols-2 gap-4">
+                      <div class="kpi">
+                        <div class="text-xs text-slate-500">Tests</div>
+                        <div class="num text-3xl sm:text-4xl text-slate-900" data-count="36">0</div>
+                      </div>
+                      <div class="kpi">
+                        <div class="text-xs text-slate-500">Dage i byg</div>
+                        <div class="num text-3xl sm:text-4xl text-slate-900" data-count="48">0</div>
+                      </div>
+                      <div class="kpi col-span-2">
+                        <div class="flex items-center justify-between text-xs text-slate-500"><span>Fremdrift</span><span id="pctLabel">0%</span></div>
+                        <div class="bar mt-2"><i id="pctBar"></i></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Scroll hint -->
+            <div id="scrollHint" class="pointer-events-none absolute left-1/2 bottom-4 select-none animate-[hintBounce_1.6s_ease-in-out_infinite]">
+              <div class="rounded-full bg-white/90 ring-1 ring-slate-200 px-3 py-1.5 shadow-e1 backdrop-blur text-slate-700 text-xs font-semibold flex items-center gap-2">
+                <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+                Scroll ned for at læse mere
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      
+    </main>
+
+    <script>
+      // Navbar underline + active link (samme adfærd som index)
+      (function(){
+        const nav = document.getElementById('main-nav');
+        const indicator = document.getElementById('nav-indicator');
+        if (!nav || !indicator) return;
+        const links = Array.from(nav.querySelectorAll('.nav-link'));
+        const current = location.pathname.split('/').pop() || 'index.html';
+        let active = links.find(a => (a.getAttribute('href')||'') === current) || links[0];
+        function setActive(el){ links.forEach(x=>{ x.classList.remove('is-active'); x.removeAttribute('aria-current'); }); el.classList.add('is-active'); el.setAttribute('aria-current','page'); }
+        function pos(el){ const nb=nav.getBoundingClientRect(); const b=el.getBoundingClientRect(); const w=Math.round(b.width*0.7); const l=Math.round((b.left-nb.left)+(b.width-w)/2); indicator.style.left=l+'px'; indicator.style.width=w+'px'; }
+        links.forEach(a=>{ a.addEventListener('mouseenter',()=>pos(a)); a.addEventListener('focus',()=>pos(a)); a.addEventListener('click',()=>{ active=a; setActive(active); }); });
+        nav.addEventListener('mouseleave',()=>pos(active));
+        window.addEventListener('load',()=>{ setActive(active); pos(active); });
+        window.addEventListener('resize',()=>pos(active));
+      })();
+
+      // Mobile menu toggle
+      (function(){
+        const btn = document.getElementById('nav-toggle');
+        const menu = document.getElementById('mobile-menu');
+        if (!btn || !menu) return;
+        function open(){ menu.classList.remove('hidden'); btn.setAttribute('aria-expanded','true'); }
+        function close(){ menu.classList.add('hidden'); btn.setAttribute('aria-expanded','false'); }
+        btn.addEventListener('click', ()=> (btn.getAttribute('aria-expanded')==='true')? close(): open());
+        document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') close(); });
+        document.addEventListener('click', (e)=>{ if(!menu.contains(e.target) && !btn.contains(e.target)) close(); });
+        menu.querySelectorAll('a').forEach(a=>a.addEventListener('click', close));
+      })();
+
+      // Slides controller: bliv på stedet, skift indhold ved scrollprogress
+      (function(){
+        const wrapper = document.querySelector('.slides');
+        if (!wrapper) return;
+        const slides = Array.from(wrapper.querySelectorAll('.slide'));
+        let active = -1;
+        const hint = document.getElementById('scrollHint');
+
+        function progress(){
+          const r = wrapper.getBoundingClientRect();
+          const total = Math.max(1, r.height - window.innerHeight);
+          const scrolled = Math.min(Math.max(-r.top, 0), total);
+          return scrolled / total; // 0..1
+        }
+
+        function apply(idx){
+          if (idx === active) return;
+          const prev = active;
+          active = idx;
+          slides.forEach((s,i)=>{
+            s.classList.toggle('is-active', i===active);
+            s.classList.toggle('is-prev', i===prev && prev!==-1);
+          });
+          // Animate counters when slide 3 becomes active
+          if (active === 2) {
+            const nums = document.querySelectorAll('.num[data-count]');
+            nums.forEach(el=>{
+              if (el.dataset.animated) return;
+              el.dataset.animated = 'true';
+              const target = parseInt(el.getAttribute('data-count')||'0',10);
+              const start = 0; const dur = 900; const t0 = performance.now();
+              function step(t){
+                const k = Math.min(1, (t - t0) / dur);
+                const val = Math.round(start + (target - start) * k);
+                el.textContent = val.toString();
+                if (k < 1) requestAnimationFrame(step);
+              }
+              requestAnimationFrame(step);
+            });
+          }
+        }
+
+        function tick(){
+          const p = progress();
+          const n = slides.length; // e.g. 3
+          let idx = Math.floor(p * n);
+          if (idx >= n) idx = n-1;
+          apply(idx);
+          if (hint) hint.style.opacity = p < 0.08 ? '1' : '0';
+        }
+
+        window.addEventListener('load', ()=>{ apply(0); tick(); });
+        window.addEventListener('scroll', tick, { passive:true });
+        window.addEventListener('resize', tick);
+      })();
+    </script>
+  </body>
+  </html>
