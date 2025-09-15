@@ -81,8 +81,8 @@
       }
       .claim.is-visible .flash-on-reveal { animation: none !important; }
 
-      /* Override existing claim highlight spans to look hand-drawn and avoid overlap */
-      #claims blockquote span {
+      /* Override existing claim highlight spans only inside the quote text */
+      #claims blockquote p span {
         margin: 0 !important;                 /* remove negative margins */
         border-radius: 0 !important;           /* no rounded pills */
         background-color: transparent !important; /* remove flat bg color only */
@@ -93,6 +93,14 @@
         background-repeat: no-repeat;          /* one per line fragment */
         background-size: 100% 1.25em;         /* fill the line height */
         background-position: 0 0.1em;         /* slightly offset for hand-drawn feel */
+      }
+
+      /* Ensure digital timer spans are not highlighted like quote spans */
+      #claims blockquote [data-digital] span,
+      #claims blockquote time[data-since] {
+        background-image: none !important;
+        background-color: transparent !important;
+        padding: 0 !important;
       }
 
       /* Remove auto-inserted Claims intro and decorative quote marks */
@@ -293,20 +301,29 @@
           </div>
         </div>
       </div>
+      
     </section>
     <!-- Claims section (emphasized as statements, not official records) -->
     <section id="claims" class="relative bg-brand-50/60">
+      <!-- Wave divider top (full width, separates hero -> claims) -->
+      <div class="relative pointer-events-none -mt-1" aria-hidden="true">
+        <svg viewBox="0 0 1200 120" preserveAspectRatio="none" class="block w-full h-16 sm:h-20 rotate-180">
+          <!-- Layered brand waves, mirrored so the curve points nedad -->
+          <path d="M0,16 C160,80 360,-20 600,60 C840,140 1040,20 1200,64 L1200,120 L0,120 Z" fill="#e0f2fe"/>
+          <path d="M0,0 C150,100 350,-40 600,60 C850,160 1050,20 1200,80 L1200,120 L0,120 Z" fill="#bae6fd"/>
+        </svg>
+      </div>
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20">
-        <div class="space-y-24">
+        <div class="space-y-32">
           <!-- Claim 1 -->
-          <article>
-            <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          <article class="relative overflow-hidden rounded-[36px] bg-white/90 backdrop-blur-sm ring-1 ring-brand-100/70 shadow-e1 px-6 py-10 sm:px-10 sm:py-12">
+            <div class="grid gap-8 lg:gap-16 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] items-start lg:items-center">
               <!-- Image -->
-              <figure class="order-2 lg:order-2 lg:col-span-5 relative h-56 sm:h-72 lg:h-[380px] aspect-[4/3]">
+              <figure class="order-2 lg:order-2 relative h-56 sm:h-72 lg:h-[380px] aspect-[4/3]">
                 <img src="https://placehold.co/900x700/eff6ff/0ea5e9?text=Michael%20/%20Vandkanonkonge&font=inter" alt="Michael – Vandkanonkonge (placeholder)" class="absolute inset-0 w-full h-full object-cover rounded-3xl shadow-e2" />
               </figure>
               <!-- Text -->
-              <div class="order-1 lg:order-1 lg:col-span-7 py-2">
+              <div class="order-1 lg:order-1 py-2 sm:py-4">
                 <blockquote class="mt-1 text-slate-900">
                   <p class="text-3xl sm:text-4xl lg:text-5xl leading-snug font-semibold max-w-[30ch] sm:max-w-[36ch]">
                     “Jeg er den 
@@ -320,16 +337,19 @@
               </div>
             </div>
           </article>
+          
 
-          <!-- Claim 2 (alternating layout, no box) -->
-          <article>
-            <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          
+
+          <!-- Claim 2 (alternating layout) -->
+          <article class="relative overflow-hidden rounded-[36px] bg-white/90 backdrop-blur-sm ring-1 ring-brand-100/70 shadow-e1 px-6 py-10 sm:px-10 sm:py-12">
+            <div class="grid gap-8 lg:gap-16 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] items-start lg:items-center">
               <!-- Image (left on desktop) -->
-              <figure class="lg:order-1 lg:col-span-5 relative h-56 sm:h-72 lg:h-[380px] aspect-[4/3]">
+              <figure class="lg:order-1 relative h-56 sm:h-72 lg:h-[380px] aspect-[4/3]">
                 <img src="https://placehold.co/900x700/eff6ff/0ea5e9?text=Vandkanon&font=inter" alt="Vandkanon – konstruktion (placeholder)" class="absolute inset-0 w-full h-full object-cover rounded-3xl shadow-e2" />
               </figure>
               <!-- Text -->
-              <div class="lg:order-2 lg:col-span-7 py-2">
+              <div class="lg:order-2 py-2 sm:py-4">
                 <blockquote class="mt-1 text-slate-900">
                   <p class="text-3xl sm:text-4xl lg:text-5xl leading-snug font-semibold max-w-[30ch] sm:max-w-[36ch]">
                     “Sammen med mine samarbejdspartnere har jeg bygget 
@@ -341,6 +361,14 @@
             </div>
           </article>
         </div>
+      </div>
+      <!-- Wave divider bottom (mirrored, separates claims -> next) -->
+      <div class="relative pointer-events-none -mb-1" aria-hidden="true">
+        <svg viewBox="0 0 1200 120" preserveAspectRatio="none" class="block w-full h-16 sm:h-20">
+          <!-- Layered brand waves, standard orientation (curve points opad) -->
+          <path d="M0,16 C160,80 360,-20 600,60 C840,140 1040,20 1200,64 L1200,120 L0,120 Z" fill="#e0f2fe"/>
+          <path d="M0,0 C150,100 350,-40 600,60 C850,160 1050,20 1200,80 L1200,120 L0,120 Z" fill="#bae6fd"/>
+        </svg>
       </div>
     </section>
 
@@ -429,82 +457,12 @@
       });
     </script>
     <script>
-      // Enhance claims: intro, visuals, reveal, narrative
+      // Minimal enhance: add reveal animation to claims only
       (function(){
         const section = document.getElementById('claims');
         if (!section) return;
-
-        // Add intro block if missing
-        const container = section.querySelector('div.mx-auto');
-        const existingIntro = container && container.querySelector('[data-claims-intro]');
-        if (container && !existingIntro) {
-          const intro = document.createElement('div');
-          intro.setAttribute('data-claims-intro', '');
-          intro.className = 'max-w-3xl mb-12';
-          intro.innerHTML = `
-            <span class="inline-flex items-center gap-2 rounded-full bg-white/70 ring-1 ring-brand-200 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-brand-700">Claims</span>
-            <h2 class="mt-4 font-display text-2xl sm:text-3xl font-bold tracking-tight">Det vi påstår – og hvorfor</h2>
-            <p class="mt-2 text-slate-600">Vores vigtigste claims, fortalt som korte nedslag i historien. Ikke officielle rekorder – men sandheden, sådan som vi oplevede den.</p>
-          `;
-          const list = container.querySelector('.space-y-24');
-          if (list) container.insertBefore(intro, list);
-        }
-
-        // Decorate each claim article and blockquote
         const articles = section.querySelectorAll('article');
-        articles.forEach((article, i) => {
-          article.classList.add('claim');
-          const bq = article.querySelector('blockquote');
-          if (!bq) return;
-          bq.classList.add('relative');
-
-          // Decorative quote mark
-          if (!bq.querySelector('[data-quote-mark]')) {
-            bq.insertAdjacentHTML('afterbegin', `
-              <div data-quote-mark class="absolute -top-6 -left-4 text-brand-200 select-none" aria-hidden="true" title="citat">
-                <svg width="64" height="64" viewBox="0 0 24 24" fill="currentColor" class="opacity-60"><path d="M7.17 6A5.17 5.17 0 0 0 2 11.17v6.16A.67.67 0 0 0 2.67 18h6.16a.67.67 0 0 0 .67-.67v-6.16A5.17 5.17 0 0 0 4.33 6Zm12 0A5.17 5.17 0 0 0 14 11.17v6.16a.67.67 0 0 0 .67.67h6.16a.67.67 0 0 0 .67-.67v-6.16A5.17 5.17 0 0 0 16.33 6Z"/></svg>
-              </div>
-            `);
-          }
-
-          // Add flash-on-reveal to highlighted spans
-          bq.querySelectorAll('span').forEach(s => s.classList.add('flash-on-reveal'));
-
-          // Add narrative + CTA once
-          if (!bq.querySelector('.claim-extra')) {
-            const extra = document.createElement('div');
-            extra.className = 'claim-extra';
-            let text = '';
-            let href = '#';
-            let cta = 'Læs mere';
-            if (i === 0) {
-              text = 'Idéen lød vanvittig. Med de rigtige folk, sikkerhed og præcision lykkedes det – og viste, hvad systemet faktisk kan.';
-              href = 'historie.html';
-              cta = 'Læs historien';
-            } else if (i === 1) {
-              text = 'Ikke kun for rekorden – men for at flytte grænserne for, hvad vandtryk kan bruges til i praksis.';
-              href = 'materialer.html';
-              cta = 'Se hvordan';
-            }
-            extra.innerHTML = `
-              <p class="mt-4 text-slate-600 max-w-prose">${text}</p>
-              <a href="${href}" class="mt-4 inline-flex items-center gap-2 text-brand-700 font-semibold hover:text-brand-800">
-                ${cta}
-                <svg viewBox="0 0 24 24" class="h-5 w-5 fill-current"><path d="M5 12h12m-4-4 4 4-4 4" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </a>
-            `;
-            bq.appendChild(extra);
-          }
-
-          // Fix alt text on images in this claim (best-effort)
-          const img = article.querySelector('figure img');
-          if (img) {
-            if (i === 0) img.alt = 'Michael – Vandkanonkonge (placeholder)';
-            if (i === 1) img.alt = 'Vandkanon – konstruktion (placeholder)';
-          }
-        });
-
-        // Reveal on scroll
+        articles.forEach(a => a.classList.add('claim'));
         const observer = new IntersectionObserver((entries)=>{
           for (const entry of entries) {
             if (entry.isIntersecting) {
@@ -516,5 +474,118 @@
         section.querySelectorAll('.claim').forEach(el=>observer.observe(el));
       })();
     </script>
+    <script>
+      // Add and update small "Siden …" timers under each claim (with tiles)
+      (function(){
+        const section = document.getElementById('claims');
+        if (!section) return;
+
+        const titles = [
+          'Verdens forste Vandkanonkonge',
+          'Verdens storste Vandkanon'
+        ];
+        const sinceISO = '2025-08-24T12:00:00+02:00';
+        const claims = section.querySelectorAll('article blockquote');
+        claims.forEach((bq, i) => {
+          if (!bq || bq.querySelector('[data-since-container]')) return;
+          const wrap = document.createElement('div');
+          wrap.className = 'mt-6 border-t border-brand-100/70 pt-5';
+          wrap.setAttribute('data-since-container','');
+          const title = titles[i] || '';
+          // Compose inline timer row
+          wrap.innerHTML = `
+            <time class="sr-only" data-since datetime="${sinceISO}" data-title="${title}">24. aug. 2025 kl. 12:00</time>
+            <div class="flex flex-wrap items-baseline gap-x-6 gap-y-3 font-semibold text-slate-900" data-digital data-digital-tiles>
+              <span class="flex items-baseline gap-2 leading-none">
+                <span class="font-mono text-3xl sm:text-4xl tabular-nums" data-dd>0</span>
+                <span class="text-xs sm:text-sm uppercase tracking-wider text-slate-500">dage</span>
+              </span>
+              <span class="flex items-baseline gap-2 leading-none">
+                <span class="font-mono text-3xl sm:text-4xl tabular-nums" data-hh>00</span>
+                <span class="text-xs sm:text-sm uppercase tracking-wider text-slate-500">timer</span>
+              </span>
+              <span class="flex items-baseline gap-2 leading-none">
+                <span class="font-mono text-3xl sm:text-4xl tabular-nums" data-mm>00</span>
+                <span class="text-xs sm:text-sm uppercase tracking-wider text-slate-500">min</span>
+              </span>
+              <span class="flex items-baseline gap-2 leading-none" data-tile="ss">
+                <span class="font-mono text-3xl sm:text-4xl tabular-nums" data-ss>00</span>
+                <span class="text-xs sm:text-sm uppercase tracking-wider text-slate-500">sek</span>
+              </span>
+            </div>
+          `;
+          const timeEl0 = wrap.querySelector('time[data-since]');
+          if (timeEl0) timeEl0.setAttribute('data-title', i===0 ? 'Verdens forste Vandkanonkonge' : (i===1 ? 'Verdens storste Vandkanon' : ''));
+          const holder = bq.parentElement || bq;
+          holder.insertBefore(wrap, bq.nextSibling);
+        });
+
+        const containers = section.querySelectorAll('[data-since-container]');
+        if (!containers.length) return;
+
+        const prefersReduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        function formatBaseDate(dt){
+          try {
+            const fmtDate = new Intl.DateTimeFormat('da-DK', { day:'2-digit', month:'short', year:'numeric', timeZone:'Europe/Copenhagen' }).format(dt);
+            const h = dt.toLocaleTimeString('da-DK', { hour:'2-digit', minute:'2-digit', hour12:false, timeZone:'Europe/Copenhagen' }).replace('.', ':');
+            return `${fmtDate} kl. ${h}`;
+          } catch {
+            return dt.toISOString();
+          }
+        }
+
+        const items = Array.from(containers).map(c => {
+          const timeEl = c.querySelector('[data-since]');
+          const ddEl = c.querySelector('[data-dd]');
+          const hhEl = c.querySelector('[data-hh]');
+          const mmEl = c.querySelector('[data-mm]');
+          const ssEl = c.querySelector('[data-ss]');
+          if (!timeEl || !ddEl || !hhEl || !mmEl) return null;
+          const iso = timeEl.getAttribute('datetime');
+          const title = timeEl.getAttribute('data-title') || '';
+          const since = new Date(iso);
+          timeEl.textContent = formatBaseDate(since);
+          if (title) timeEl.setAttribute('title', `${title} - ${formatBaseDate(since)}`);
+          if (prefersReduce && ssEl) {
+            const tile = c.querySelector("[data-tile='ss']");
+            if (tile) tile.style.display = 'none';
+          }
+          return { ddEl, hhEl, mmEl, ssEl, since };
+        }).filter(Boolean);
+        if (!items.length) return;
+
+        function tick(){
+          const now = Date.now();
+          for (const it of items){
+            const delta = now - it.since.getTime();
+            const totalSec = Math.max(0, Math.floor(delta / 1000));
+            const days = Math.floor(totalSec / 86400);
+            const hours = Math.floor((totalSec % 86400) / 3600);
+            const mins = Math.floor((totalSec % 3600) / 60);
+            const secs = totalSec % 60;
+            it.ddEl.textContent = String(days);
+            it.hhEl.textContent = String(hours).padStart(2,'0');
+            it.mmEl.textContent = String(mins).padStart(2,'0');
+            if (it.ssEl) it.ssEl.textContent = String(secs).padStart(2,'0');
+          }
+        }
+
+        let active = false;
+        const observer = new IntersectionObserver((entries)=>{
+          for (const e of entries){
+            if (e.isIntersecting){ active = true; return; }
+          }
+          active = false;
+        }, { threshold: 0.1 });
+        observer.observe(section);
+
+        tick();
+        const intervalMs = prefersReduce ? 60000 : 1000;
+        setInterval(()=>{ if (active) tick(); }, intervalMs);
+      })();
+    </script>
+    
   </body>
 </html>
+
