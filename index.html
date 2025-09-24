@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Vandkanonkonge · Michael</title>
+    <title>Vandkanonkonge</title>
     <meta name="description" content="Historien om Michael – Vandkanonkonge. Oplev præstationen, del reaktioner og book Michael til at fortælle om det." />
 
     <!-- Fonts (Material-like: Poppins + Inter) -->
@@ -131,6 +131,39 @@
         background-position: 0 0.1em;
       }
 
+      /* Sponsor banner sticky state styling */
+      #sponsor-banner {
+        --sponsor-offset: 56px;
+        width: 100%;
+        transform: translateY(0);
+        transition: transform 200ms ease;
+        will-change: transform;
+      }
+
+      #sponsor-banner.is-fixed {
+        position: fixed;
+        top: var(--sponsor-offset, 56px);
+        left: 0;
+        right: 0;
+      }
+
+      #sponsor-banner.is-stuck [data-sponsor-track] {
+        background-color: rgba(255, 255, 255, 0.92);
+        border-color: rgba(148, 163, 184, 0.45);
+        box-shadow: 0 16px 40px -28px rgba(15, 23, 42, 0.55);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+      }
+
+      #sponsor-banner.is-stuck [data-sponsor-fade] {
+        opacity: 1;
+      }
+
+      [data-sponsor-placeholder] {
+        display: block;
+        height: 0;
+      }
+
       
     </style>
   </head>
@@ -163,8 +196,8 @@
 
         <!-- Right: Facebook link + Mobile burger -->
         <div class="flex items-center gap-2">
-          <a href="https://www.facebook.com/mhlillelund" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="hidden md:inline-flex h-10 w-10 items-center justify-center rounded-lg ring-1 ring-[#1877F2]/30 text-[#1877F2] hover:bg-[#1877F2]/10 transition-transform duration-150 hover:scale-[1.03]">
-            <svg viewBox="0 0 24 24" class="h-6 w-6 fill-current" aria-hidden="true"><path d="M13.5 9H15V6h-1.5A3.5 3.5 0 0 0 10 9.5V11H8v3h2v7h3v-7h2.1l.4-3H13v-1a1 1 0 0 1 1-1Z"/></svg>
+          <a href="https://www.youtube.com/vandkanonkonge" target="_blank" rel="noopener noreferrer" aria-label="YouTube" class="hidden md:inline-flex h-10 w-10 items-center justify-center rounded-lg ring-1 ring-[#FF0000]/30 text-[#FF0000] hover:bg-[#FF0000]/10 transition-transform duration-150 hover:scale-[1.03]">
+            <svg viewBox="0 0 24 24" class="h-6 w-6 fill-current" aria-hidden="true"><path d="M21.6 7.2a2.5 2.5 0 0 0-1.76-1.77C18.06 5 12 5 12 5s-6.06 0-7.84.43A2.5 2.5 0 0 0 2.4 7.2 26.1 26.1 0 0 0 2 12a26.1 26.1 0 0 0 .4 4.8 2.5 2.5 0 0 0 1.76 1.77C5.94 18 12 18 12 18s6.06 0 7.84-.43a2.5 2.5 0 0 0 1.76-1.77 26.1 26.1 0 0 0 .4-4.8 26.1 26.1 0 0 0-.4-4.8ZM10 14.65V9.35L15 12l-5 2.65Z"/></svg>
           </a>
           <button id="nav-toggle" type="button" class="md:hidden inline-flex items-center justify-center h-9 w-9 rounded-lg ring-1 ring-slate-200 text-slate-700 hover:bg-slate-50" aria-controls="mobile-menu" aria-expanded="false" aria-label="Åbn menu">
             <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -183,7 +216,6 @@
         </nav>
       </div>
     </header>
-
     <!-- Hero -->
     <section class="relative">
       <div class="absolute inset-0 -z-10 bg-gradient-to-b from-brand-50 to-white"></div>
@@ -224,93 +256,93 @@
         </div>
       </div>
 
-      <!-- Partners marquee integrated in hero (no boxed container) -->
-      <div class="px-4 sm:px-6 lg:px-8 pb-10">
-        <div class="mx-auto max-w-7xl">
-          <div>
-            <div class="flex items-center gap-3 px-1">
-              <span class="text-xs font-medium uppercase tracking-wide text-slate-500">Samarbejdspartnere</span>
-              <span class="h-[1px] flex-1 bg-slate-200"></span>
-            </div>
-            <div class="relative overflow-hidden">
-              <!-- edge fades only over the marquee row -->
-              <div class="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-white/90 to-transparent"></div>
-              <div class="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-white/90 to-transparent"></div>
-              <ul class="flex gap-10 w-max animate-marquee will-change-transform py-4 pr-24">
-                <!-- one set: real partner logos, free (no wrapper) -->
-                <li class="flex items-center h-12">
-                  <img src="partnere/AK2-logo.png" alt="AK2" class="h-10 w-auto object-contain" />
-                </li>
-                <li class="flex items-center h-12">
-                  <img src="partnere/BJ-logo.png" alt="BJ" class="h-10 w-auto object-contain" />
-                </li>
-                <li class="flex items-center h-12">
-                  <img src="partnere/ksn-logo.png" alt="KSN" class="h-10 w-auto object-contain" />
-                </li>
-                <li class="flex items-center h-12">
-                  <img src="partnere/Scanregn-logo.png" alt="Scanregn" class="h-10 w-auto object-contain" />
-                </li>
-                <li class="flex items-center h-12">
-                  <img src="partnere/svendmadsen-logo.jpg" alt="Svend Madsen" class="h-10 w-auto object-contain" />
-                </li>
-                <li class="flex items-center h-12">
-                  <img src="partnere/bitbrew-logo.png" alt="Bitbrew" class="h-10 w-auto object-contain" />
-                </li>
-                <li class="flex items-center h-12">
-                  <img src="partnere/gsv-logo.png" alt="GSV" class="h-10 w-auto object-contain" />
-                </li>
-                <li class="flex items-center h-12">
-                  <img src="partnere/jpbc-logo.png" alt="JPBC" class="h-10 w-auto object-contain" />
-                </li>
-                <li class="flex items-center h-12">
-                  <img src="partnere/jyskebank-logo.png" alt="Jyske Bank" class="h-10 w-auto object-contain" />
-                </li>
-                <li class="flex items-center h-12">
-                  <img src="partnere/stsbiler-logo.png" alt="STS Biler" class="h-10 w-auto object-contain" />
-                </li>
-                <li class="flex items-center h-12">
-                  <img src="partnere/xlbyg-logo.png" alt="XL-BYG" class="h-10 w-auto object-contain" />
-                </li>
-                <!-- duplicate set for seamless loop -->
-                <li class="flex items-center h-12">
-                  <img src="partnere/AK2-logo.png" alt="AK2" class="h-10 w-auto object-contain" />
-                </li>
-                <li class="flex items-center h-12">
-                  <img src="partnere/BJ-logo.png" alt="BJ" class="h-10 w-auto object-contain" />
-                </li>
-                <li class="flex items-center h-12">
-                  <img src="partnere/ksn-logo.png" alt="KSN" class="h-10 w-auto object-contain" />
-                </li>
-                <li class="flex items-center h-12">
-                  <img src="partnere/Scanregn-logo.png" alt="Scanregn" class="h-10 w-auto object-contain" />
-                </li>
-                <li class="flex items-center h-12">
-                  <img src="partnere/svendmadsen-logo.jpg" alt="Svend Madsen" class="h-10 w-auto object-contain" />
-                </li>
-                <li class="flex items-center h-12">
-                  <img src="partnere/bitbrew-logo.png" alt="Bitbrew" class="h-10 w-auto object-contain" />
-                </li>
-                <li class="flex items-center h-12">
-                  <img src="partnere/gsv-logo.png" alt="GSV" class="h-10 w-auto object-contain" />
-                </li>
-                <li class="flex items-center h-12">
-                  <img src="partnere/jpbc-logo.png" alt="JPBC" class="h-10 w-auto object-contain" />
-                </li>
-                <li class="flex items-center h-12">
-                  <img src="partnere/jyskebank-logo.png" alt="Jyske Bank" class="h-10 w-auto object-contain" />
-                </li>
-                <li class="flex items-center h-12">
-                  <img src="partnere/stsbiler-logo.png" alt="STS Biler" class="h-10 w-auto object-contain" />
-                </li>
-                <li class="flex items-center h-12">
-                  <img src="partnere/xlbyg-logo.png" alt="XL-BYG" class="h-10 w-auto object-contain" />
-                </li>
-              </ul>
+      <!-- Partners marquee integrated in hero, sticks beneath nav once scrolled -->
+      <div class="pb-10" data-sponsor-container>
+        <div data-sponsor-placeholder class="transition-[height] duration-200 ease-out"></div>
+        <div id="sponsor-banner" class="z-30 px-4 sm:px-6 lg:px-8">
+          <div class="mx-auto max-w-7xl">
+            <div class="px-1" data-sponsor-shell>
+              <div data-sponsor-track class="relative overflow-hidden rounded-2xl border border-transparent bg-transparent transition-[background-color,border-color,box-shadow] duration-200 ease-out">
+                <!-- edge fades only over the marquee row -->
+                <div data-sponsor-fade aria-hidden="true" class="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-white to-transparent opacity-0 transition-opacity duration-200 ease-out"></div>
+                <div data-sponsor-fade aria-hidden="true" class="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-white to-transparent opacity-0 transition-opacity duration-200 ease-out"></div>
+                <ul class="flex gap-10 w-max animate-marquee will-change-transform py-4 pr-24">
+                    <!-- one set: real partner logos, free (no wrapper) -->
+                    <li class="flex items-center h-12">
+                      <img src="partnere/AK2-logo.png" alt="AK2" class="h-10 w-auto object-contain" />
+                    </li>
+                    <li class="flex items-center h-12">
+                      <img src="partnere/BJ-logo.png" alt="BJ" class="h-10 w-auto object-contain" />
+                    </li>
+                    <li class="flex items-center h-12">
+                      <img src="partnere/ksn-logo.png" alt="KSN" class="h-10 w-auto object-contain" />
+                    </li>
+                    <li class="flex items-center h-12">
+                      <img src="partnere/Scanregn-logo.png" alt="Scanregn" class="h-10 w-auto object-contain" />
+                    </li>
+                    <li class="flex items-center h-12">
+                      <img src="partnere/svendmadsen-logo.jpg" alt="Svend Madsen" class="h-10 w-auto object-contain" />
+                    </li>
+                    <li class="flex items-center h-12">
+                      <img src="partnere/bitbrew-logo.png" alt="Bitbrew" class="h-10 w-auto object-contain" />
+                    </li>
+                    <li class="flex items-center h-12">
+                      <img src="partnere/gsv-logo.png" alt="GSV" class="h-10 w-auto object-contain" />
+                    </li>
+                    <li class="flex items-center h-12">
+                      <img src="partnere/jpbc-logo.png" alt="JPBC" class="h-10 w-auto object-contain" />
+                    </li>
+                    <li class="flex items-center h-12">
+                      <img src="partnere/jyskebank-logo.png" alt="Jyske Bank" class="h-10 w-auto object-contain" />
+                    </li>
+                    <li class="flex items-center h-12">
+                      <img src="partnere/stsbiler-logo.png" alt="STS Biler" class="h-10 w-auto object-contain" />
+                    </li>
+                    <li class="flex items-center h-12">
+                      <img src="partnere/xlbyg-logo.png" alt="XL-BYG" class="h-10 w-auto object-contain" />
+                    </li>
+                    <!-- duplicate set for seamless loop -->
+                    <li class="flex items-center h-12">
+                      <img src="partnere/AK2-logo.png" alt="AK2" class="h-10 w-auto object-contain" />
+                    </li>
+                    <li class="flex items-center h-12">
+                      <img src="partnere/BJ-logo.png" alt="BJ" class="h-10 w-auto object-contain" />
+                    </li>
+                    <li class="flex items-center h-12">
+                      <img src="partnere/ksn-logo.png" alt="KSN" class="h-10 w-auto object-contain" />
+                    </li>
+                    <li class="flex items-center h-12">
+                      <img src="partnere/Scanregn-logo.png" alt="Scanregn" class="h-10 w-auto object-contain" />
+                    </li>
+                    <li class="flex items-center h-12">
+                      <img src="partnere/svendmadsen-logo.jpg" alt="Svend Madsen" class="h-10 w-auto object-contain" />
+                    </li>
+                    <li class="flex items-center h-12">
+                      <img src="partnere/bitbrew-logo.png" alt="Bitbrew" class="h-10 w-auto object-contain" />
+                    </li>
+                    <li class="flex items-center h-12">
+                      <img src="partnere/gsv-logo.png" alt="GSV" class="h-10 w-auto object-contain" />
+                    </li>
+                    <li class="flex items-center h-12">
+                      <img src="partnere/jpbc-logo.png" alt="JPBC" class="h-10 w-auto object-contain" />
+                    </li>
+                    <li class="flex items-center h-12">
+                      <img src="partnere/jyskebank-logo.png" alt="Jyske Bank" class="h-10 w-auto object-contain" />
+                    </li>
+                    <li class="flex items-center h-12">
+                      <img src="partnere/stsbiler-logo.png" alt="STS Biler" class="h-10 w-auto object-contain" />
+                    </li>
+                    <li class="flex items-center h-12">
+                      <img src="partnere/xlbyg-logo.png" alt="XL-BYG" class="h-10 w-auto object-contain" />
+                    </li>
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-      
+
       <div class="pb-10">
         <div class="flex justify-center">
           <a href="#claims" class="group inline-flex flex-col items-center gap-2 text-brand-600 hover:text-brand-700 transition-colors" aria-label="Scroll ned til udsagnene">
@@ -344,6 +376,9 @@
               </figure>
               <!-- Text -->
               <div class="order-1 lg:order-1 py-2 sm:py-4">
+                <div class="mb-5">
+                  <span class="inline-flex text-xl sm:text-2xl font-semibold uppercase tracking-[0.22em] text-brand-600 border-b-2 border-brand-200 pb-1">Claim #1</span>
+                </div>
                 <blockquote class="mt-1 text-slate-900">
                   <p class="text-3xl sm:text-4xl lg:text-5xl leading-snug font-semibold max-w-[30ch] sm:max-w-[36ch]">
                     “Jeg er den 
@@ -370,6 +405,9 @@
               </figure>
               <!-- Text -->
               <div class="lg:order-2 py-2 sm:py-4">
+                <div class="mb-5">
+                  <span class="inline-flex text-xl sm:text-2xl font-semibold uppercase tracking-[0.22em] text-brand-600 border-b-2 border-brand-200 pb-1">Claim #2</span>
+                </div>
                 <blockquote class="mt-1 text-slate-900">
                   <p class="text-3xl sm:text-4xl lg:text-5xl leading-snug font-semibold max-w-[30ch] sm:max-w-[36ch]">
                     “Sammen med mine samarbejdspartnere har jeg bygget 
@@ -384,11 +422,11 @@
       </div>
       <div id="record-callout" class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 pb-12">
         <div class="rounded-[26px] border border-brand-100/70 bg-white/85 px-6 py-6 sm:px-8 sm:py-7 text-center shadow-e1">
-          <h3 class="text-2xl sm:text-3xl font-semibold text-slate-900">Har du slået rekorden?</h3>
-          <p class="mt-3 text-base text-slate-600">Vi vil gerne høre fra andre vandkanonentusiaster. Har du presset længden, farten eller bygget noget helt nyt, så del data, billeder eller video, så holder vi styr på historien.</p>
-          <a href="mailto:kontakt@vandkanon.dk?subject=Jeg%20har%20sl%C3%A5et%20vandkanon-rekorden" class="mt-5 inline-flex items-center gap-2 rounded-full bg-brand-500 px-5 py-2.5 font-semibold text-white shadow-e1 transition hover:bg-brand-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500">
+          <h3 class="text-2xl sm:text-3xl font-semibold text-slate-900">Har du slået mit claim?</h3>
+          <p class="mt-3 text-base text-slate-600">Send os fakta, video eller billeder, hvis du mener, du har skabt en endnu vildere vandkanonoplevelse. Vi dokumenterer bragene og holder styr på kronen.</p>
+          <a href="mailto:kontakt@vandkanon.dk?subject=Jeg%20har%20sl%C3%A5et%20dit%20vandkanon-claim" class="mt-5 inline-flex items-center gap-2 rounded-full bg-brand-500 px-5 py-2.5 font-semibold text-white shadow-e1 transition hover:bg-brand-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500">
             <svg viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor" aria-hidden="true"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 2v.51l-8 5.3-8-5.3V6h16ZM4 18V8.76l7.47 4.95a1 1 0 0 0 1.06 0L20 8.76V18H4Z"/></svg>
-            Fortæl os det
+            Send os dit claim
           </a>
         </div>
       </div>
@@ -510,6 +548,93 @@
           img.src = base + '?t=' + Date.now();
         }
         btn.addEventListener('click', replay);
+      })();
+
+      // Toggle sticky styling for the sponsor marquee so it docks under the nav when scrolling
+      (function(){
+        const banner = document.getElementById('sponsor-banner');
+        if (!banner) return;
+        const container = banner.parentElement?.closest('[data-sponsor-container]') || banner.parentElement;
+        const placeholder = container ? container.querySelector('[data-sponsor-placeholder]') : null;
+        const nav = document.querySelector('header.sticky');
+
+        const toPixels = (value) => `${Math.round(value)}px`;
+
+        const readNavOffset = () => {
+          if (!nav) return 56;
+          const rect = nav.getBoundingClientRect();
+          return Math.max(0, rect.bottom);
+        };
+
+        let isFixed = false;
+        let pendingFinalize = null;
+
+        const lock = (offset) => {
+          if (isFixed) return;
+          isFixed = true;
+          const height = banner.offsetHeight;
+          if (placeholder) placeholder.style.height = `${height}px`;
+          const beforeTop = banner.getBoundingClientRect().top;
+          banner.classList.add('is-fixed');
+          banner.style.transform = `translateY(${Math.round(beforeTop - offset)}px)`;
+          requestAnimationFrame(() => {
+            banner.classList.add('is-stuck');
+            banner.style.transform = 'translateY(0)';
+          });
+        };
+
+        const release = (offset) => {
+          if (!isFixed) return;
+          isFixed = false;
+          const targetTop = placeholder ? placeholder.getBoundingClientRect().top : offset;
+          banner.classList.remove('is-stuck');
+          const delta = Math.round(targetTop - offset);
+          banner.style.transform = `translateY(${delta}px)`;
+          const finalize = () => {
+            pendingFinalize = null;
+            if (isFixed) {
+              banner.style.transform = '';
+              return;
+            }
+            banner.classList.remove('is-fixed');
+            banner.style.transform = '';
+            if (placeholder) placeholder.style.height = '';
+          };
+          if (delta === 0) {
+            finalize();
+          } else {
+            pendingFinalize = finalize;
+            banner.addEventListener('transitionend', finalize, { once: true });
+          }
+        };
+
+        const evaluate = () => {
+          const offset = readNavOffset();
+          banner.style.setProperty('--sponsor-offset', toPixels(offset));
+          const top = (container || banner).getBoundingClientRect().top;
+          if (top <= offset + 0.5) {
+            lock(offset);
+          } else {
+            release(offset);
+          }
+        };
+
+        let ticking = false;
+        const requestEval = () => {
+          if (ticking) return;
+          ticking = true;
+          window.requestAnimationFrame(() => {
+            evaluate();
+            ticking = false;
+          });
+        };
+
+        window.addEventListener('scroll', requestEval, { passive: true });
+        window.addEventListener('resize', requestEval);
+        window.addEventListener('orientationchange', requestEval);
+        window.addEventListener('load', requestEval);
+
+        evaluate();
       })();
 
       // Replace claim images with real assets
@@ -650,4 +775,3 @@
     
   </body>
 </html>
-
