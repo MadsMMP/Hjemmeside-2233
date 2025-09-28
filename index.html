@@ -217,10 +217,13 @@
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-16 pb-8 lg:pt-24 lg:pb-10">
         <div class="grid lg:grid-cols-2 gap-12 items-center">
           <!-- Copy -->
-          <div>
+          <div class='relative group'>
             <h1 class="mt-5 font-display text-4xl sm:text-5xl font-bold tracking-tight text-slate-900">
               Verdens Første Vandkanonkonge
             </h1>
+            <button id="open-chatgpt" type="button" class="absolute -top-2 -right-2 sm:top-0 sm:right-0 inline-flex h-7 w-7 items-center justify-center rounded-full border border-brand-200 bg-white/80 text-brand-500/40 shadow-e1 backdrop-blur transition opacity-0 group-hover:opacity-70 focus:opacity-100 hover:text-brand-600 hover:bg-white" aria-haspopup="dialog" aria-controls="chatgpt-modal" aria-expanded="false" aria-label="Skjult billede">
+              <svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2Zm1 14.5h-2V11h2Zm0-6h-2V8.5h2Z"/></svg>
+            </button>
             <p class="mt-4 text-lg leading-relaxed text-slate-700">
               Her kan du læse om rejsen til verdens første vandkanonkonge.
             </p>
@@ -263,71 +266,115 @@
                 <ul class="flex gap-10 w-max animate-marquee will-change-transform py-4 pr-24">
                     <!-- one set: real partner logos, free (no wrapper) -->
                     <li class="flex items-center h-12">
-                      <img src="partnere/AK2-logo.png" alt="AK2" class="h-10 w-auto object-contain" />
+                      <a href="https://ak2.dk/" target="_blank" rel="noopener noreferrer" class="flex items-center">
+                        <img src="partnere/AK2-logo.png" alt="AK2" class="h-10 w-auto object-contain" />
+                      </a>
                     </li>
                     <li class="flex items-center h-12">
-                      <img src="partnere/BJ-logo.png" alt="BJ" class="h-10 w-auto object-contain" />
+                      <a href="https://b-j.dk/" target="_blank" rel="noopener noreferrer" class="flex items-center">
+                        <img src="partnere/BJ-logo.png" alt="BJ" class="h-10 w-auto object-contain" />
+                      </a>
                     </li>
                     <li class="flex items-center h-12">
-                      <img src="partnere/ksn-logo.png" alt="KSN" class="h-10 w-auto object-contain" />
+                      <a href="https://www.ksn.dk/" target="_blank" rel="noopener noreferrer" class="flex items-center">
+                        <img src="partnere/ksn-logo.png" alt="KSN" class="h-10 w-auto object-contain" />
+                      </a>
                     </li>
                     <li class="flex items-center h-12">
-                      <img src="partnere/Scanregn-logo.png" alt="Scanregn" class="h-10 w-auto object-contain" />
+                      <a href="https://scanregn.dk/" target="_blank" rel="noopener noreferrer" class="flex items-center">
+                        <img src="partnere/Scanregn-logo.png" alt="Scanregn" class="h-10 w-auto object-contain" />
+                      </a>
                     </li>
                     <li class="flex items-center h-12">
-                      <img src="partnere/svendmadsen-logo.jpg" alt="Svend Madsen" class="h-10 w-auto object-contain" />
+                      <a href="https://www.svendemadsen.dk/" target="_blank" rel="noopener noreferrer" class="flex items-center">
+                        <img src="partnere/svendmadsen-logo.jpg" alt="Svend Madsen" class="h-10 w-auto object-contain" />
+                      </a>
                     </li>
                     <li class="flex items-center h-12">
-                      <img src="partnere/bitbrew-logo.jpg" alt="Bitbrew" class="h-10 w-auto object-contain" />
+                      <a href="https://bitbrew.dk/" target="_blank" rel="noopener noreferrer" class="flex items-center">
+                        <img src="partnere/bitbrew-logo.jpg" alt="Bitbrew" class="h-10 w-auto object-contain" />
+                      </a>
                     </li>
                     <li class="flex items-center h-12">
-                      <img src="partnere/gsv-logo.png" alt="GSV" class="h-10 w-auto object-contain" />
+                      <a href="https://www.gsv.dk/gsv-afdelinger/gsv-i-viborg/" target="_blank" rel="noopener noreferrer" class="flex items-center">
+                        <img src="partnere/gsv-logo.png" alt="GSV" class="h-10 w-auto object-contain" />
+                      </a>
                     </li>
                     <li class="flex items-center h-12">
-                      <img src="partnere/jpbc-logo.png" alt="JPBC" class="h-10 w-auto object-contain" />
+                      <a href="https://www.jpbc.dk/" target="_blank" rel="noopener noreferrer" class="flex items-center">
+                        <img src="partnere/jpbc-logo.png" alt="JPBC" class="h-10 w-auto object-contain" />
+                      </a>
                     </li>
                     <li class="flex items-center h-12">
-                      <img src="partnere/jyskebank-logo.png" alt="Jyske Bank" class="h-10 w-auto object-contain" />
+                      <a href="https://www.jyskebank.dk/kontakt/afdelingsinfo?departmentid=11950" target="_blank" rel="noopener noreferrer" class="flex items-center">
+                        <img src="partnere/jyskebank-logo.png" alt="Jyske Bank" class="h-10 w-auto object-contain" />
+                      </a>
                     </li>
                     <li class="flex items-center h-12">
-                      <img src="partnere/stsbiler-logo.png" alt="STS Biler" class="h-10 w-auto object-contain" />
+                      <a href="https://www.stsbiler.dk/" target="_blank" rel="noopener noreferrer" class="flex items-center">
+                        <img src="partnere/stsbiler-logo.png" alt="STS Biler" class="h-10 w-auto object-contain" />
+                      </a>
                     </li>
                     <li class="flex items-center h-12">
-                      <img src="partnere/xlbyg-logo.png" alt="XL-BYG" class="h-10 w-auto object-contain" />
+                      <a href="https://www.xl-byg.dk/forretning/thorsoe" target="_blank" rel="noopener noreferrer" class="flex items-center">
+                        <img src="partnere/xlbyg-logo.png" alt="XL-BYG" class="h-10 w-auto object-contain" />
+                      </a>
                     </li>
                     <!-- duplicate set for seamless loop -->
                     <li class="flex items-center h-12">
-                      <img src="partnere/AK2-logo.png" alt="AK2" class="h-10 w-auto object-contain" />
+                      <a href="https://ak2.dk/" target="_blank" rel="noopener noreferrer" class="flex items-center">
+                        <img src="partnere/AK2-logo.png" alt="AK2" class="h-10 w-auto object-contain" />
+                      </a>
                     </li>
                     <li class="flex items-center h-12">
-                      <img src="partnere/BJ-logo.png" alt="BJ" class="h-10 w-auto object-contain" />
+                      <a href="https://b-j.dk/" target="_blank" rel="noopener noreferrer" class="flex items-center">
+                        <img src="partnere/BJ-logo.png" alt="BJ" class="h-10 w-auto object-contain" />
+                      </a>
                     </li>
                     <li class="flex items-center h-12">
-                      <img src="partnere/ksn-logo.png" alt="KSN" class="h-10 w-auto object-contain" />
+                      <a href="https://www.ksn.dk/" target="_blank" rel="noopener noreferrer" class="flex items-center">
+                        <img src="partnere/ksn-logo.png" alt="KSN" class="h-10 w-auto object-contain" />
+                      </a>
                     </li>
                     <li class="flex items-center h-12">
-                      <img src="partnere/Scanregn-logo.png" alt="Scanregn" class="h-10 w-auto object-contain" />
+                      <a href="https://scanregn.dk/" target="_blank" rel="noopener noreferrer" class="flex items-center">
+                        <img src="partnere/Scanregn-logo.png" alt="Scanregn" class="h-10 w-auto object-contain" />
+                      </a>
                     </li>
                     <li class="flex items-center h-12">
-                      <img src="partnere/svendmadsen-logo.jpg" alt="Svend Madsen" class="h-10 w-auto object-contain" />
+                      <a href="https://www.svendemadsen.dk/" target="_blank" rel="noopener noreferrer" class="flex items-center">
+                        <img src="partnere/svendmadsen-logo.jpg" alt="Svend Madsen" class="h-10 w-auto object-contain" />
+                      </a>
                     </li>
                     <li class="flex items-center h-12">
-                      <img src="partnere/bitbrew-logo.png" alt="Bitbrew" class="h-10 w-auto object-contain" />
+                      <a href="https://bitbrew.dk/" target="_blank" rel="noopener noreferrer" class="flex items-center">
+                        <img src="partnere/bitbrew-logo.png" alt="Bitbrew" class="h-10 w-auto object-contain" />
+                      </a>
                     </li>
                     <li class="flex items-center h-12">
-                      <img src="partnere/gsv-logo.png" alt="GSV" class="h-10 w-auto object-contain" />
+                      <a href="https://www.gsv.dk/gsv-afdelinger/gsv-i-viborg/" target="_blank" rel="noopener noreferrer" class="flex items-center">
+                        <img src="partnere/gsv-logo.png" alt="GSV" class="h-10 w-auto object-contain" />
+                      </a>
                     </li>
                     <li class="flex items-center h-12">
-                      <img src="partnere/jpbc-logo.png" alt="JPBC" class="h-10 w-auto object-contain" />
+                      <a href="https://www.jpbc.dk/" target="_blank" rel="noopener noreferrer" class="flex items-center">
+                        <img src="partnere/jpbc-logo.png" alt="JPBC" class="h-10 w-auto object-contain" />
+                      </a>
                     </li>
                     <li class="flex items-center h-12">
-                      <img src="partnere/jyskebank-logo.png" alt="Jyske Bank" class="h-10 w-auto object-contain" />
+                      <a href="https://www.jyskebank.dk/kontakt/afdelingsinfo?departmentid=11950" target="_blank" rel="noopener noreferrer" class="flex items-center">
+                        <img src="partnere/jyskebank-logo.png" alt="Jyske Bank" class="h-10 w-auto object-contain" />
+                      </a>
                     </li>
                     <li class="flex items-center h-12">
-                      <img src="partnere/stsbiler-logo.png" alt="STS Biler" class="h-10 w-auto object-contain" />
+                      <a href="https://www.stsbiler.dk/" target="_blank" rel="noopener noreferrer" class="flex items-center">
+                        <img src="partnere/stsbiler-logo.png" alt="STS Biler" class="h-10 w-auto object-contain" />
+                      </a>
                     </li>
                     <li class="flex items-center h-12">
-                      <img src="partnere/xlbyg-logo.png" alt="XL-BYG" class="h-10 w-auto object-contain" />
+                      <a href="https://www.xl-byg.dk/forretning/thorsoe" target="_blank" rel="noopener noreferrer" class="flex items-center">
+                        <img src="partnere/xlbyg-logo.png" alt="XL-BYG" class="h-10 w-auto object-contain" />
+                      </a>
                     </li>
                   </ul>
                 </div>
@@ -359,6 +406,7 @@
           <path d="M0,0 C150,100 350,-40 600,60 C850,160 1050,20 1200,80 L1200,120 L0,120 Z" fill="#bae6fd"/>
         </svg>
       </div>
+
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20">
         <div class="space-y-32">
           <!-- Claim 1 -->
@@ -386,7 +434,20 @@
 
           
 
-          <!-- Claim 2 (alternating layout) -->
+          
+          <div id="chatgpt-modal" class="fixed inset-0 z-50 hidden" role="dialog" aria-modal="true" aria-labelledby="chatgpt-title">
+            <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"></div>
+            <div class="relative mx-auto my-10 max-w-3xl px-4">
+              <div class="relative rounded-2xl bg-white shadow-e2 overflow-hidden">
+                <button id="close-chatgpt" type="button" class="absolute right-3 top-3 inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-slate-700 shadow-e1 ring-1 ring-slate-200 hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500" aria-label="Luk billede">
+                  <svg viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor" aria-hidden="true"><path d="M13.41 12 18 7.41 16.59 6 12 10.59 7.41 6 6 7.41 10.59 12 6 16.59 7.41 18 12 13.41 16.59 18 18 16.59Z"/></svg>
+                </button>
+                <h2 id="chatgpt-title" class="sr-only">Billede</h2>
+                <img src="img/chatgpt.png" alt="ChatGPT billede" class="block w-full h-auto" />
+              </div>
+            </div>
+          </div>
+<!-- Claim 2 (alternating layout) -->
           <article class="relative overflow-hidden px-6 py-10 sm:px-10 sm:py-12">
             <div class="grid gap-8 lg:gap-16 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] items-start lg:items-center">
               <!-- Image (left on desktop) -->
@@ -757,3 +818,27 @@
     
   </body>
 </html>
+
+
+
+
+
+
+
+
+
+    <script>
+      (function(){
+        const open = document.getElementById('open-chatgpt');
+        const modal = document.getElementById('chatgpt-modal');
+        const close = document.getElementById('close-chatgpt');
+        if (!open || !modal || !close) return;
+        function show(){ modal.classList.remove('hidden'); open.setAttribute('aria-expanded','true'); document.body.classList.add('overflow-hidden'); }
+        function hide(){ modal.classList.add('hidden'); open.setAttribute('aria-expanded','false'); document.body.classList.remove('overflow-hidden'); }
+        open.addEventListener('click', show);
+        close.addEventListener('click', hide);
+        modal.addEventListener('click', (e)=>{ if (e.target === modal || e.target.classList.contains('backdrop-blur-sm')) hide(); });
+        document.addEventListener('keydown', (e)=>{ if (e.key === 'Escape') hide(); });
+      })();
+    </script>
+
