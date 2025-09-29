@@ -165,6 +165,19 @@
       }
 
       
+      /* Secret ChatGPT icon: timed reveal + motion */
+      #open-chatgpt { will-change: opacity, transform; }
+      #open-chatgpt.is-shown { opacity: 0.9 !important; }
+      @media (hover: hover) and (pointer: fine) {
+        /* On desktop keep hover behavior slightly subtler after reveal */
+        #open-chatgpt.is-shown:hover { opacity: 1 !important; }
+      }
+      @keyframes popIn {
+        0% { opacity: 0; transform: translateY(-6px) scale(0.85); }
+        60% { opacity: 1; transform: translateY(0) scale(1.06); }
+        100% { opacity: 0.9; transform: translateY(0) scale(1); }
+      }
+      .animate-pop { animation: popIn 700ms cubic-bezier(.2,.8,.2,1) both; }
     </style>
   </head>
   <body id="top" class="antialiased bg-white text-slate-900">
@@ -221,9 +234,7 @@
             <h1 class="mt-5 font-display text-4xl sm:text-5xl font-bold tracking-tight text-slate-900">
               Verdens Første Vandkanonkonge
             </h1>
-            <button id="open-chatgpt" type="button" class="absolute -top-2 -right-2 sm:top-0 sm:right-0 inline-flex h-7 w-7 items-center justify-center rounded-full border border-brand-200 bg-white/80 text-brand-500/40 shadow-e1 backdrop-blur transition opacity-0 group-hover:opacity-70 focus:opacity-100 hover:text-brand-600 hover:bg-white" aria-haspopup="dialog" aria-controls="chatgpt-modal" aria-expanded="false" aria-label="Skjult billede">
-              <svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2Zm1 14.5h-2V11h2Zm0-6h-2V8.5h2Z"/></svg>
-            </button>
+            
             <p class="mt-4 text-lg leading-relaxed text-slate-700">
               Her kan du læse om rejsen til verdens første vandkanonkonge.
             </p>
@@ -417,7 +428,7 @@
                 <img src="https://placehold.co/900x700/eff6ff/0ea5e9?text=Michael%20/%20Vandkanonkonge&font=inter" alt="Michael – Vandkanonkonge (placeholder)" class="absolute inset-0 w-full h-full object-cover rounded-3xl shadow-e2" />
               </figure>
               <!-- Text -->
-              <div class="order-1 lg:order-1 py-2 sm:py-4">
+              <div class="order-1 lg:order-1 py-2 sm:py-4 relative">
                 <div class="mb-5">
                   <span class="inline-flex text-xl sm:text-2xl font-semibold uppercase tracking-[0.22em] text-brand-600 border-b-2 border-brand-200 pb-1">Claim #1</span>
                 </div>
@@ -427,6 +438,9 @@
                     <span class="box-decoration-clone rounded px-1 -mx-0.5 bg-brand-200/60">vandkanonkonge</span>.”
                   </p>
                 </blockquote>
+                <button id="open-chatgpt" type="button" class="absolute -top-3 -right-3 sm:top-0 sm:right-0 inline-flex h-7 w-7 items-center justify-center rounded-full border border-brand-200 bg-white/80 text-brand-500/40 shadow-e1 backdrop-blur transition opacity-0 group-hover:opacity-70 focus:opacity-100 hover:text-brand-600 hover:bg-white" aria-haspopup="dialog" aria-controls="chatgpt-modal" aria-expanded="false" aria-label="Skjult billede">
+                  <svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2Zm1 14.5h-2V11h2Zm0-6h-2V8.5h2Z"/></svg>
+                </button>
               </div>
             </div>
           </article>
@@ -839,6 +853,18 @@
         close.addEventListener('click', hide);
         modal.addEventListener('click', (e)=>{ if (e.target === modal || e.target.classList.contains('backdrop-blur-sm')) hide(); });
         document.addEventListener('keydown', (e)=>{ if (e.key === 'Escape') hide(); });
+
+        // Timed reveal to ensure visibility on mobile (no hover)
+        const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const revealDelayMs = 2400;
+        setTimeout(() => {
+          open.classList.add('is-shown');
+          if (!prefersReduced) {
+            open.classList.add('animate-pop');
+            // Clean up the animation class after it finishes
+            setTimeout(() => open.classList.remove('animate-pop'), 900);
+          }
+        }, revealDelayMs);
       })();
     </script>
 
